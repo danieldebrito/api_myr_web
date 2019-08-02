@@ -6,7 +6,7 @@ require '../composer/vendor/autoload.php';
 require './AccesoDatos.php';
 
 ///////////////////   ENTITIES  ///////////
-require './entities/articulo/articuloApi.php';
+require './entities/articulo/articulosApi.php';
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
