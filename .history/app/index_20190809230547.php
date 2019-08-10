@@ -8,7 +8,7 @@ require './AccesoDatos.php';
 ///////////////////   ENTITIES  ///////////
 require './entities/articulo/articuloApi.php';
 require './entities/aplicacion/aplicacionApi.php';
-require './entities/art_mar_mod_mot/art_mar_mod_motApi.php';
+require './entities/aplicacion/art_mar_mod_motApi.php';
 
 
 

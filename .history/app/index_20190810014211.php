@@ -8,8 +8,6 @@ require './AccesoDatos.php';
 ///////////////////   ENTITIES  ///////////
 require './entities/articulo/articuloApi.php';
 require './entities/aplicacion/aplicacionApi.php';
-require './entities/art_mar_mod_mot/art_mar_mod_motApi.php';
-
 
 
 $config['displayErrorDetails'] = true;
@@ -42,7 +40,7 @@ $app->group('/articulos', function () {
 });
 
 $app->group('/art_mar_mod_mot', function () {
-  $this->get('/', \art_mar_mod_motApi::class . ':readAllApi');
+  $this->get('/', \art_mar_mod_motApi::class . ':art_mar_mod_motALLApi');
   /*
   $this->get('/{id_articulo}', \articuloApi::class . ':readApi');
   $this->post('/', \articuloApi::class . ':createApi');
