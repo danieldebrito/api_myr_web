@@ -20,7 +20,7 @@ class art_mar_mod_motApi /*extends producto implements IApiCRUD*/
 		$id_mar_mod=$ArrayDeParametros['id_mar_mod'];
 		$id_motor=$ArrayDeParametros['id_motor'];
 		
-		$all=art_mar_mod_mot::readParams(
+		$all=articulo::readParams(
 			$id_articulo, 
 			$id_mar_mod,
 			$id_motor

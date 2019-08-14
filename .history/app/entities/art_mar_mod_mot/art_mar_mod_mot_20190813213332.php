@@ -35,22 +35,22 @@ class art_mar_mod_mot
         FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art
         WHERE amo.id_motor = mmm.id_motor
         AND amo.id_articulo = SUBSTRING(art.id_articulo, 1, 7)';
-
+/*
         if ($id_articulo != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'amo.id_articulo = ' . "'" . $id_articulo . "'";
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'id_articulo = ' . "'" . $id_articulo . "'";
         }
 
         if ($id_mar_mod != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'mmm.id_mar_mod = ' . "'" . $id_mar_mod . "'";
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'id_mar_mod = ' . "'" . $id_mar_mod . "'";
         }
 
         if ($id_motor != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'mmm.id_motor = ' . "'" . $id_motor . "'";
-        }
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'id_motor = ' . "'" . $id_motor . "'";
+        }*/
 
-        $instruccionSQL = $instruccionSQL . ' LIMIT 30';
+       // $instruccionSQL = $instruccionSQL . ' LIMIT 30';
 
-        var_dump('</br></br> <b>INSTRUCCION SQL: </b>'.$instruccionSQL);
+        var_dump('INSTRUCCION SQL: '.$instruccionSQL);
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("

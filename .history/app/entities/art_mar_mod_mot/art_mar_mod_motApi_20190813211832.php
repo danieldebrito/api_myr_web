@@ -16,9 +16,9 @@ class art_mar_mod_motApi /*extends producto implements IApiCRUD*/
 
 		$ArrayDeParametros = $request->getParsedBody();
 
-		$id_articulo=$ArrayDeParametros['id_articulo'];
-		$id_mar_mod=$ArrayDeParametros['id_mar_mod'];
-		$id_motor=$ArrayDeParametros['id_motor'];
+		$linea=$linea=$ArrayDeParametros['id_articulo'];
+		$marca=$ArrayDeParametros['id_mar_mod'];
+		$combustible=$ArrayDeParametros['id_motor'];
 		
 		$all=art_mar_mod_mot::readParams(
 			$id_articulo, 

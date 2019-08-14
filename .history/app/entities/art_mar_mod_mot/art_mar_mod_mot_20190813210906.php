@@ -37,20 +37,18 @@ class art_mar_mod_mot
         AND amo.id_articulo = SUBSTRING(art.id_articulo, 1, 7)';
 
         if ($id_articulo != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'amo.id_articulo = ' . "'" . $id_articulo . "'";
+            $instr = $instr . ' AND ' . 'id_articulo = ' . "'" . $id_articulo . "'";
         }
 
         if ($id_mar_mod != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'mmm.id_mar_mod = ' . "'" . $id_mar_mod . "'";
+            $instr = $instr . ' AND ' . 'id_mar_mod = ' . "'" . $id_mar_mod . "'";
         }
 
         if ($id_motor != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'mmm.id_motor = ' . "'" . $id_motor . "'";
+            $instr = $instr . ' AND ' . 'id_motor = ' . "'" . $id_motor . "'";
         }
 
-        $instruccionSQL = $instruccionSQL . ' LIMIT 30';
-
-        var_dump('</br></br> <b>INSTRUCCION SQL: </b>'.$instruccionSQL);
+        // var_dump('INSTRUCCION SQL: '.$instr);
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("
@@ -58,7 +56,7 @@ class art_mar_mod_mot
 		");
         $consulta->execute();
 
-        return $consulta->fetchAll(PDO::FETCH_CLASS, "art_mar_mod_mot");
+        return $consulta->fetchAll(PDO::FETCH_CLASS, "Articulo");
     }
 }
 

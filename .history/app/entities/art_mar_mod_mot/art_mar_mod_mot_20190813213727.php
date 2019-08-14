@@ -39,14 +39,14 @@ class art_mar_mod_mot
         if ($id_articulo != null) {
             $instruccionSQL = $instruccionSQL . ' AND ' . 'amo.id_articulo = ' . "'" . $id_articulo . "'";
         }
-
+/*
         if ($id_mar_mod != null) {
             $instruccionSQL = $instruccionSQL . ' AND ' . 'mmm.id_mar_mod = ' . "'" . $id_mar_mod . "'";
         }
 
         if ($id_motor != null) {
             $instruccionSQL = $instruccionSQL . ' AND ' . 'mmm.id_motor = ' . "'" . $id_motor . "'";
-        }
+        }*/
 
         $instruccionSQL = $instruccionSQL . ' LIMIT 30';
 

@@ -27,9 +27,31 @@ class art_mar_mod_mot
         }
     }
 
-    public function readParams($id_articulo, $id_mar_mod, $id_motor)
+    public static function readParams($id_articulo, $id_mar_mod, $id_motor)
     {
+        try {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta
+                ("SELECT art.id_articulo, mmm.id_mar_mod, amo.id_motor
+                FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art
+                WHERE amo.id_motor = mmm.id_motor
+                AND amo.id_articulo = SUBSTRING(art.id_articulo, 1, 7)
+                AND SUBSTRING(amo.id_articulo, 1, 7) = '01-2870'
+                AND mmm.id_mar_mod = '299'
+                AND amo.id_motor = '30'
+                LIMIT 30
+                ");
+            $consulta->execute();
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS, "art_mar_mod_mot");
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+    }
 
+    public function readParams($id_articulo, $id_mar_mod, $id_motor) {
         $instruccionSQL =
         'SELECT art.id_articulo, mmm.id_mar_mod, amo.id_motor
         FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art
@@ -37,20 +59,18 @@ class art_mar_mod_mot
         AND amo.id_articulo = SUBSTRING(art.id_articulo, 1, 7)';
 
         if ($id_articulo != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'amo.id_articulo = ' . "'" . $id_articulo . "'";
+            $instr = $instr . ' AND ' . 'id_articulo = ' . "'" . $id_articulo . "'";
         }
 
         if ($id_mar_mod != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'mmm.id_mar_mod = ' . "'" . $id_mar_mod . "'";
+            $instr = $instr . ' AND ' . 'id_mar_mod = ' . "'" . $id_mar_mod . "'";
         }
 
         if ($id_motor != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'mmm.id_motor = ' . "'" . $id_motor . "'";
+            $instr = $instr . ' AND ' . 'id_motor = ' . "'" . $id_motor . "'";
         }
 
-        $instruccionSQL = $instruccionSQL . ' LIMIT 30';
-
-        var_dump('</br></br> <b>INSTRUCCION SQL: </b>'.$instruccionSQL);
+        // var_dump('INSTRUCCION SQL: '.$instr);
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("
@@ -58,7 +78,7 @@ class art_mar_mod_mot
 		");
         $consulta->execute();
 
-        return $consulta->fetchAll(PDO::FETCH_CLASS, "art_mar_mod_mot");
+        return $consulta->fetchAll(PDO::FETCH_CLASS, "Articulo");
     }
 }
 

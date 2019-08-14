@@ -8,27 +8,9 @@ class art_mar_mod_motApi /*extends producto implements IApiCRUD*/
     {
         $all = art_mar_mod_mot::readAll();
         $newResponse = $response->withJson($all, 200);
-
+        var_dump($newResponse);
         return $newResponse;
     }
-
-    public function readParamsApi ($request, $response, $args) {
-
-		$ArrayDeParametros = $request->getParsedBody();
-
-		$id_articulo=$ArrayDeParametros['id_articulo'];
-		$id_mar_mod=$ArrayDeParametros['id_mar_mod'];
-		$id_motor=$ArrayDeParametros['id_motor'];
-		
-		$all=art_mar_mod_mot::readParams(
-			$id_articulo, 
-			$id_mar_mod,
-			$id_motor
-			);
-		$newResponse = $response->withJson($all, 200);
-
-		return $newResponse;
-	}
 
     /*
 
