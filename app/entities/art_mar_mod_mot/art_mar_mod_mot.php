@@ -27,7 +27,7 @@ class art_mar_mod_mot
         }
     }
 
-    public function readParams($id_linea, $id_marca, $id_combustible, $id_motor, $modelo, $cilindrada, $competicion, $id_producto, $id_aplicacion)
+    public function readParams($linea, $marca, $combustible, $motor, $modelo, $cilindrada, $competicion, $producto, $aplicacion)
     {
 
         $instruccionSQL =
@@ -40,20 +40,20 @@ class art_mar_mod_mot
         AND mar.id_marca = mam.id_marca
         AND amo.id_articulo = SUBSTRING(art.id_articulo, 1, 7)';
 
-        if ($id_linea != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'mar.id_linea = ' . "'" . $id_linea . "'";
+        if ($linea != null) {
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'mar.id_linea = ' . "'" . $linea . "'";
         }
 
-        if ($id_marca != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . ' mar.id_marca = ' . "'" . $id_marca . "'";
+        if ($marca != null) {
+            $instruccionSQL = $instruccionSQL . ' AND ' . ' mar.id_marca = ' . "'" . $marca . "'";
         }
 
-        if ($id_combustible != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'mot.id_combustible = ' . "'" . $id_combustible . "'";
+        if ($combustible != null) {
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'mot.id_combustible = ' . "'" . $combustible . "'";
         }
 
-        if ($id_motor != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'amo.id_motor = ' . "'" . $id_motor . "'";
+        if ($motor != null) {
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'amo.id_motor = ' . "'" . $motor . "'";
         }
 
         if ($modelo != null) {
@@ -68,12 +68,12 @@ class art_mar_mod_mot
             $instruccionSQL = $instruccionSQL . ' AND ' . 'art.competicion = ' . "'" . $competicion . "'";
         }
 
-        if ($id_producto != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'art.id_producto = ' . "'" . $id_producto . "'";
+        if ($producto != null) {
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'art.id_producto = ' . "'" . $producto . "'";
         }
 
-        if ($id_aplicacion != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'art.id_aplicacion = ' . "'" . $id_aplicacion . "'";
+        if ($aplicacion != null) {
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'art.id_aplicacion = ' . "'" . $aplicacion . "'";
         }
 
         $instruccionSQL = $instruccionSQL . ' LIMIT 30';
