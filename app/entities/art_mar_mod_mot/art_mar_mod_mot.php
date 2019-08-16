@@ -1,9 +1,6 @@
 <?php
 class art_mar_mod_mot
 {
-    public $id_articulo;
-    public $id_mar_mod;
-    public $id_motor;
 
     public static function readAll()
     {
