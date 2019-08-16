@@ -16,14 +16,26 @@ class art_mar_mod_motApi /*extends producto implements IApiCRUD*/
 
 		$ArrayDeParametros = $request->getParsedBody();
 
-		$id_articulo=$ArrayDeParametros['id_articulo'];
-		$id_mar_mod=$ArrayDeParametros['id_mar_mod'];
-		$id_motor=$ArrayDeParametros['id_motor'];
+		$id_linea=$ArrayDeParametros['id_linea'];
+		$id_marca=$ArrayDeParametros['id_marca'];
+        $id_combustible=$ArrayDeParametros['id_combustible'];
+        $id_motor=$ArrayDeParametros['id_motor'];
+        $modelo=$ArrayDeParametros['modelo'];
+        $cilindrada=$ArrayDeParametros['cilindrada'];
+        $competicion=$ArrayDeParametros['competicion'];
+        $id_producto=$ArrayDeParametros['id_producto'];
+        $id_aplicacion=$ArrayDeParametros['id_aplicacion'];
 		
 		$all=art_mar_mod_mot::readParams(
-			$id_articulo, 
-			$id_mar_mod,
-			$id_motor
+			$id_linea, 
+			$id_marca,
+            $id_combustible,
+            $id_motor,
+            $modelo,
+            $cilindrada,
+            $competicion,
+            $id_producto,
+            $id_aplicacion
 			);
 		$newResponse = $response->withJson($all, 200);
 

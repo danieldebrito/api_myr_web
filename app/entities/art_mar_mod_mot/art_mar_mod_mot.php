@@ -10,14 +10,17 @@ class art_mar_mod_mot
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta
-                ("SELECT art.id_articulo, mmm.id_mar_mod, amo.id_motor
-            FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art
+            ("SELECT art.id_articulo, mar.marca, mot.id_combustible, amo.id_motor, mam.modelo, mot.cilindrada, mar.id_linea, art.competicion, art.id_producto, art.id_aplicacion
+            FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art, mar_mod mam, motores mot, marcas mar
             WHERE amo.id_motor = mmm.id_motor
+            AND mam.id_mar_mod = mmm.id_mar_mod
+            AND mot.id_motor = mmm.id_motor
+            AND mar.id_marca = mam.id_marca
             AND amo.id_articulo = SUBSTRING(art.id_articulo, 1, 7)
             LIMIT 30
 			");
             $consulta->execute();
-            $ret = $consulta->fetchAll(PDO::FETCH_CLASS, "art_mar_mod_mot");
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
 
         } catch (Exception $e) {
             $mensaje = $e->getMessage();
@@ -27,30 +30,58 @@ class art_mar_mod_mot
         }
     }
 
-    public function readParams($id_articulo, $id_mar_mod, $id_motor)
+    public function readParams($id_linea, $id_marca, $id_combustible, $id_motor, $modelo, $cilindrada, $competicion, $id_producto, $id_aplicacion)
     {
 
         $instruccionSQL =
-        'SELECT art.id_articulo, mmm.id_mar_mod, amo.id_motor
-        FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art
+        'SELECT art.id_articulo, mar.id_linea, mar.id_marca, mot.id_combustible, amo.id_motor, 
+        mam.modelo, mot.cilindrada, art.competicion, art.id_producto, art.id_aplicacion
+        FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art, mar_mod mam, motores mot, marcas mar
         WHERE amo.id_motor = mmm.id_motor
+        AND mam.id_mar_mod = mmm.id_mar_mod
+        AND mot.id_motor = mmm.id_motor
+        AND mar.id_marca = mam.id_marca
         AND amo.id_articulo = SUBSTRING(art.id_articulo, 1, 7)';
 
-        if ($id_articulo != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'amo.id_articulo = ' . "'" . $id_articulo . "'";
+        if ($id_linea != null) {
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'mar.id_linea = ' . "'" . $id_linea . "'";
         }
 
-        if ($id_mar_mod != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'mmm.id_mar_mod = ' . "'" . $id_mar_mod . "'";
+        if ($id_marca != null) {
+            $instruccionSQL = $instruccionSQL . ' AND ' . ' mar.id_marca = ' . "'" . $id_marca . "'";
+        }
+
+        if ($id_combustible != null) {
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'mot.id_combustible = ' . "'" . $id_combustible . "'";
         }
 
         if ($id_motor != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'mmm.id_motor = ' . "'" . $id_motor . "'";
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'amo.id_motor = ' . "'" . $id_motor . "'";
+        }
+
+        if ($modelo != null) {
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'mam.modelo = ' . "'" . $modelo . "'";
+        }
+
+        if ($cilindrada != null) {
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'mot.cilindrada = ' . "'" . $cilindrada . "'";
+        }
+
+        if ($competicion != null) {
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'art.competicion = ' . "'" . $competicion . "'";
+        }
+
+        if ($id_producto != null) {
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'art.id_producto = ' . "'" . $id_producto . "'";
+        }
+
+        if ($id_aplicacion != null) {
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'art.id_aplicacion = ' . "'" . $id_aplicacion . "'";
         }
 
         $instruccionSQL = $instruccionSQL . ' LIMIT 30';
 
-        // var_dump('</br></br> <b>INSTRUCCION SQL: </b>'.$instruccionSQL);
+        var_dump('</br></br> <b>INSTRUCCION SQL: </b>'.$instruccionSQL);
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("
@@ -58,7 +89,7 @@ class art_mar_mod_mot
 		");
         $consulta->execute();
 
-        return $consulta->fetchAll(PDO::FETCH_CLASS, "art_mar_mod_mot");
+        return $consulta->fetchAll(PDO::FETCH_CLASS);
     }
 }
 
