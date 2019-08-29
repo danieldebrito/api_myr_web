@@ -1,20 +1,21 @@
 <?php
-class producto
-{
-    public $id_producto;
-    public $id_sector;
-    public $producto;
-    public $tiempo_preparacion;
-    public $precio;
+class usuario{
+    public $id_usuario;
+    public $nombre;
+    public $apellido;
+    public $usuario;
+    public $pass;
+    public $estado;  // { activo, inactivo, suspendido }
+    public $rol; // { admin, user_sistema, user_web, supervisor }
 
     public static function readAll(){
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta("
-			SELECT * FROM `productos` WHERE 1   
+			SELECT * FROM `mesas` WHERE 1   
 			");
             $consulta->execute();
-            $ret = $consulta->fetchAll(PDO::FETCH_CLASS, "producto");
+            $ret = $consulta->fetchAll(PDO::FETCH_CLASS, "mesa");
         } catch (Exception $e) {
             $mensaje = $e->getMessage();
             $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
@@ -23,16 +24,16 @@ class producto
         }
     }
 
-    public static function read($id_producto){
+    public static function read($id_mesa){
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta("
 			SELECT *
-			FROM `productos`
-			WHERE `id_producto` = '$id_producto'
+			FROM `mesas`
+			WHERE `id_mesa` = '$id_mesa'
 			");
             $consulta->execute();
-            $ret = $consulta->fetchObject('producto');
+            $ret = $consulta->fetchObject('mesa');
         } catch (Exception $e) {
             $mensaje = $e->getMessage();
             $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
@@ -46,25 +47,22 @@ class producto
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta("
-			INSERT INTO `productos`
-				(`id_producto`,
-				`id_sector`,
-				`producto`,
-				`tiempo_preparacion`,
-                `precio`)
+			INSERT INTO `mesas`
+				(`id_mesa`,
+				`id_estado_mesa`,
+				`url_foto`,
+                `cant_comensales`)
 			VALUES (
-				:id_producto,
-				:id_sector,
-				:producto,
-				:tiempo_preparacion,
-                :precio)
+				:id_mesa,
+				:id_estado_mesa,
+				:url_foto,
+                :cant_comensales)
 		");
 
-            $consulta->bindValue(':id_producto', $this->id_producto, PDO::PARAM_STR);
-            $consulta->bindValue(':id_sector', $this->id_sector, PDO::PARAM_STR);
-            $consulta->bindValue(':producto', $this->producto, PDO::PARAM_STR);
-            $consulta->bindValue(':tiempo_preparacion', $this->tiempo_preparacion, PDO::PARAM_INT);
-            $consulta->bindValue(':precio', $this->precio, PDO::PARAM_INT);
+            $consulta->bindValue(':id_mesa', $this->id_mesa, PDO::PARAM_STR);
+            $consulta->bindValue(':id_estado_mesa', $this->id_estado_mesa, PDO::PARAM_STR);
+            $consulta->bindValue(':url_foto', $this->url_foto, PDO::PARAM_STR);
+            $consulta->bindValue(':cant_comensales', $this->cant_comensales, PDO::PARAM_INT);
 
             $consulta->execute();
         } catch (Exception $e) {
@@ -75,14 +73,14 @@ class producto
         }
     }
 
-    public static function delete($id_producto){
+    public static function delete($id_mesa){
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta("
-                DELETE FROM `productos` 
-                WHERE `id_producto` = '$id_producto'
+                DELETE FROM `mesas` 
+                WHERE `id_mesa` = '$id_mesa'
             ");
-            $consulta->bindValue(':id_producto', $id_producto, PDO::PARAM_STR);
+            $consulta->bindValue(':id_mesa', $id_mesa, PDO::PARAM_STR);
             $consulta->execute();
             $respuesta = array("Estado" => true, "Mensaje" => "Eliminado Correctamente");
 
@@ -99,19 +97,17 @@ class producto
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("
-                UPDATE `productos` 
+                UPDATE `mesas` 
                 SET 
-				`id_sector`=:id_sector, 
-                `producto`=:producto, 
-                `tiempo_preparacion`=:tiempo_preparacion, 
-                `precio`=:precio
-                WHERE id_producto=:id_producto");
+				`id_estado_mesa`=:id_estado_mesa, 
+				`url_foto`=:url_foto, 
+                `cant_comensales`=:cant_comensales
+                WHERE id_mesa=:id_mesa");
                 
-                $consulta->bindValue(':id_producto', $this->id_producto, PDO::PARAM_STR);
-                $consulta->bindValue(':id_sector', $this->id_sector, PDO::PARAM_STR);
-                $consulta->bindValue(':producto', $this->producto, PDO::PARAM_STR);
-                $consulta->bindValue(':tiempo_preparacion', $this->tiempo_preparacion, PDO::PARAM_INT);
-                $consulta->bindValue(':precio', $this->precio, PDO::PARAM_INT);
+                $consulta->bindValue(':id_mesa', $this->id_mesa, PDO::PARAM_STR);
+                $consulta->bindValue(':id_estado_mesa', $this->id_estado_mesa, PDO::PARAM_STR);
+                $consulta->bindValue(':url_foto', $this->url_foto, PDO::PARAM_STR);
+                $consulta->bindValue(':cant_comensales', $this->cant_comensales, PDO::PARAM_INT);
         
         return $consulta->execute();
     }

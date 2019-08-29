@@ -9,7 +9,7 @@ require './AccesoDatos.php';
 require './entities/articulo/articuloApi.php';
 require './entities/aplicacion/aplicacionApi.php';
 require './entities/art_mar_mod_mot/art_mar_mod_motApi.php';
-require './entities/usuario/userApi.php';
+require './entities/usuario/usuarioApi.php';
 
 
 
@@ -50,11 +50,14 @@ $app->group('/art_mar_mod_mot', function () {
 
 // http://localhost/api_meyro_web/index.php/user
 $app->group('/user', function () {
-  $this->get('/', \userApi::class . ':readAllApi');
-  $this->get('/{id_user}', \userApi::class . ':readApi');
-  $this->post('/', \userApi::class . ':createApi');
-  $this->delete('/{id_user}[/]', \userApi::class . ':deleteApi');
-  $this->post('/update', \userApi::class . ':updateApi');
+ 
+  $this->get('/all', \userApi::class . ':traerTodos'); 
+
+  $this->get('/{id}', \userApi::class . ':TraerUno');
+
+  $this->post('/', \userApi::class . ':CargarUno');
+ 
+ // $this->post('/update[/]', \userApi::class . ':ModificarUno');
 
   $this->post('/login[/]', \userApi::class . ':LoginUser');
 
