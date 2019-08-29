@@ -45,16 +45,6 @@ class user
             return $ret;
         }
 	}
-	
-	/*
-		public $id_user;
-	public $nombre;
-	public $apellido;
-	public $userName;
-	public $pass;
-	public $estado;  // { activo, inactivo, suspendido }
-	public $rol;
-	*/
 
     public function create()
     {
@@ -96,14 +86,14 @@ class user
         }
     }
 
-    public static function delete($id_producto){
+    public static function delete($id_user){
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $consulta = $objetoAccesoDato->RetornarConsulta("
-                DELETE FROM `productos` 
-                WHERE `id_producto` = '$id_producto'
+            $consulta = $objetoAccesoDato->RetornarConsulta(
+				"DELETE FROM `users` 
+                WHERE `id_user` = '$id_user'
             ");
-            $consulta->bindValue(':id_producto', $id_producto, PDO::PARAM_STR);
+            $consulta->bindValue(':id_user', $id_user, PDO::PARAM_STR);
             $consulta->execute();
             $respuesta = array("Estado" => true, "Mensaje" => "Eliminado Correctamente");
 
@@ -114,36 +104,44 @@ class user
         } finally {
             return $respuesta;
         }
-    }
+	}
+	
+		
+	/*
+		public $id_user;
+	public $nombre;
+	public $apellido;
+	public $userName;
+	public $pass;
+	public $estado;  // { activo, inactivo, suspendido }
+	public $rol;
+	*/
+
 
     public function update()
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("
-                UPDATE `productos` 
+        $consulta = $objetoAccesoDato->RetornarConsulta(
+			    "UPDATE `users` 
                 SET 
-				`id_sector`=:id_sector, 
-                `producto`=:producto, 
-                `tiempo_preparacion`=:tiempo_preparacion, 
-                `precio`=:precio
-                WHERE id_producto=:id_producto");
+				`nombre`=:nombre, 
+                `apellido`=:apellido, 
+                `userName`=:userName, 
+                `pass`=:pass,
+				`estado`=:estado,
+				`rol`=:rol
+                WHERE id_user=:id_user");
                 
-                $consulta->bindValue(':id_producto', $this->id_producto, PDO::PARAM_STR);
-                $consulta->bindValue(':id_sector', $this->id_sector, PDO::PARAM_STR);
-                $consulta->bindValue(':producto', $this->producto, PDO::PARAM_STR);
-                $consulta->bindValue(':tiempo_preparacion', $this->tiempo_preparacion, PDO::PARAM_INT);
-                $consulta->bindValue(':precio', $this->precio, PDO::PARAM_INT);
-        
+				$consulta->bindValue(':id_user', $this->id_user, PDO::PARAM_STR);
+				$consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
+                $consulta->bindValue(':apellido', $this->apellido, PDO::PARAM_STR);
+                $consulta->bindValue(':userName', $this->userName, PDO::PARAM_STR);
+                $consulta->bindValue(':pass', $this->pass, PDO::PARAM_STR);
+                $consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
+                $consulta->bindValue(':rol', $this->rol, PDO::PARAM_STR);
+
         return $consulta->execute();
     }
-
-
-
-
-
-
-
-
 }
 
 /*
@@ -200,3 +198,4 @@ class user
 
 }
 
+*/

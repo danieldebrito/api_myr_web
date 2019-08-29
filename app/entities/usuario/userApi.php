@@ -16,67 +16,51 @@ class userApi extends user {
         return $newResponse;
     }
 
-    	/*
-		public $id_user;
-	public $nombre;
-	public $apellido;
-	public $userName;
-	public $pass;
-	public $estado;  // { activo, inactivo, suspendido }
-	public $rol;
-	*/
-
     public function CreateApi($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
 
-        $id_user = $ArrayDeParametros['id_user'];
-        $nombre = $ArrayDeParametros['nombre'];
-        $apellido = $ArrayDeParametros['apellido'];
-        $userName = $ArrayDeParametros['userName'];
-        $pass = $ArrayDeParametros['pass'];
-        $estado = $ArrayDeParametros['estado'];
-        $rol = $ArrayDeParametros['rol'];
-
-
-        $entity = new producto();
-        $entity->id_user = $id_user;
-        $entity->nombre = $nombre;
-        $entity->apellido = $apellido;
-        $entity->userName = $userName;
-        $entity->pass = $pass;
-        $entity->estado = $estado;
-        $entity->rol = $rol;
+        $entity = new user();
+        $entity->id_user = $ArrayDeParametros['id_user'];
+        $entity->nombre = $ArrayDeParametros['nombre'];
+        $entity->apellido = $ArrayDeParametros['apellido'];
+        $entity->userName = $ArrayDeParametros['userName'];
+        $entity->pass = $ArrayDeParametros['pass'];
+        $entity->estado = $ArrayDeParametros['estado'];
+        $entity->rol = $ArrayDeParametros['rol'];
 
         $entity->create();
+
         $response->getBody()->write("true");
 
         return $response;
     }
 
-    public function deleteApi($request, $response, $args)
-    {
-        $id = $args["id_producto"];
-        $respuesta = producto::delete($id);
+    public function deleteApi($request, $response, $args){
+        $id = $args["id_user"];
+        $respuesta = user::delete($id);
         $newResponse = $response->withJson($respuesta, 200);
         return $newResponse;
     }
 
-    public function updateApi($request, $response, $args)
-    {
+    public function updateApi($request, $response, $args){
         $ArrayDeParametros = $request->getParsedBody();
-        $entity = new producto();
-        $entity->id_producto = $ArrayDeParametros['id_producto'];
-        $entity->id_sector = $ArrayDeParametros['id_sector'];
-        $entity->producto = $ArrayDeParametros['producto'];
-        $entity->tiempo_preparacion = $ArrayDeParametros['tiempo_preparacion'];
-        $entity->precio = $ArrayDeParametros['precio'];
+
+        $entity = new user();
+        $entity->id_user = $ArrayDeParametros['id_user'];
+        $entity->nombre = $ArrayDeParametros['nombre'];
+        $entity->apellido = $ArrayDeParametros['apellido'];
+        $entity->userName = $ArrayDeParametros['userName'];
+        $entity->pass = $ArrayDeParametros['pass'];
+        $entity->estado = $ArrayDeParametros['estado'];
+        $entity->rol = $ArrayDeParametros['rol'];
 
         $resultado = $entity->update();
+
         $objDelaRespuesta = new stdclass();
         $objDelaRespuesta->resultado = $resultado;
+
         return $response->withJson($objDelaRespuesta, 200);
     }
-
 
 	/*
 	
