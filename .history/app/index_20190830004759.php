@@ -2,6 +2,9 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
+header('access-control-allow-origin: * ');
+
+
 require '../composer/vendor/autoload.php';
 require './AccesoDatos.php';
 
@@ -67,6 +70,11 @@ $app->group('/user', function () {
     }
   */
 
+});
+
+$app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($req, $res) {
+  $handler = $this->notFoundHandler; // handle using the default Slim page not found handler
+  return $handler($req, $res);
 });
 
 $app->add(function ($req, $res, $next) {
