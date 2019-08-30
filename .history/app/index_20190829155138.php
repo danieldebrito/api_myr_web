@@ -2,9 +2,6 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-header('access-control-allow-origin: * ');
-
-
 require '../composer/vendor/autoload.php';
 require './AccesoDatos.php';
 
@@ -50,6 +47,8 @@ $app->group('/art_mar_mod_mot', function () {
   $this->post('/filtrar[/]', \art_mar_mod_motApi::class . ':readParamsApi');
 });
 
+
+// http://localhost/api_meyro_web/index.php/user
 $app->group('/user', function () {
   $this->get('/', \userApi::class . ':readAllApi');
   $this->get('/{id_user}', \userApi::class . ':readApi');
@@ -65,8 +64,8 @@ $app->group('/user', function () {
     body + raw  + 
 
     {
-      "userName":"ddebrito",
-      "pass":"1388"
+      "nombre":"ddebrito",
+      "clave":"1388"
     }
   */
 

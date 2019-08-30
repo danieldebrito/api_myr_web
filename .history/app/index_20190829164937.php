@@ -2,9 +2,6 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-header('access-control-allow-origin: * ');
-
-
 require '../composer/vendor/autoload.php';
 require './AccesoDatos.php';
 
@@ -65,8 +62,8 @@ $app->group('/user', function () {
     body + raw  + 
 
     {
-      "userName":"ddebrito",
-      "pass":"1388"
+      "nombre":"ddebrito",
+      "clave":"1388"
     }
   */
 

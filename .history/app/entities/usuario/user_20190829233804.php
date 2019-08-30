@@ -131,7 +131,7 @@ class user
         return $consulta->execute();
 	}
 	
-	public function Login($userName, $pass) {
+	public function Login($nombre, $clave) {
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 
         $consulta = $objetoAccesoDato->RetornarConsulta(

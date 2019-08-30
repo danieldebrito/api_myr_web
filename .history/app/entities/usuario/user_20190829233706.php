@@ -131,11 +131,11 @@ class user
         return $consulta->execute();
 	}
 	
-	public function Login($userName, $pass) {
+	public function Login($nombre, $clave) {
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 
-        $consulta = $objetoAccesoDato->RetornarConsulta(
-			"SELECT * FROM `users` WHERE `userName`= '".$userName."' AND `pass`= '".$pass."'
+        $consulta = $objetoAccesoDato->RetornarConsulta("
+		SELECT * FROM `usuarios` WHERE `nombre`= '".$nombre."' AND `clave`= '".$clave."'
 		");
 
 		$consulta->execute();

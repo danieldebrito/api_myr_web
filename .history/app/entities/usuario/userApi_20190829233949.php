@@ -69,7 +69,7 @@ class userApi extends user {
 		$retorno = user::Login($data["userName"], $data["pass"]);
 
         if ($retorno["userName"] != "") {
-            $respuesta = array("Estado" => "ok", "Mensaje" => "Logueado Exitosamente", "id_user" => $retorno["id_user"]);
+            $respuesta = array("Estado" => "ok", "Mensaje" => "Logueado Exitosamente", "idUsuario" => $retorno["idUsuario"]);
         } else {
             $respuesta = array("Estado" => "fail", "Mensaje" => "Usuario o Clave Invalidos");
         }
