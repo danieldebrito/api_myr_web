@@ -57,8 +57,6 @@ $app->group('/user', function () {
   $this->post('/login[/]', \userApi::class . ':LoginUser');
 
   /*
-    http://localhost/api_meyro/index.php/user/login
-
     body + raw  + 
 
     {
