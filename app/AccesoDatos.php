@@ -8,12 +8,12 @@ class AccesoDatos
     {
         try {
             // allytech
-            $this->objetoPDO = new PDO('mysql:host=localhost;dbname=meyro_web;charset=utf8', 'uv025572', '9BHMPHNirj', array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-            $this->objetoPDO->exec("SET CHARACTER SET utf8");
+            // $this->objetoPDO = new PDO('mysql:host=localhost;dbname=meyro_web;charset=utf8', 'uv025572', '9BHMPHNirj', array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            // $this->objetoPDO->exec("SET CHARACTER SET utf8");
             
             // local host
-            // $this->objetoPDO = new PDO('mysql:host=localhost;dbname=meyro_web;charset=utf8', 'root', '', array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-            // $this->objetoPDO->exec("SET CHARACTER SET utf8");
+            $this->objetoPDO = new PDO('mysql:host=localhost;dbname=meyro_web;charset=utf8', 'root', '', array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            $this->objetoPDO->exec("SET CHARACTER SET utf8");
             } 
         catch (PDOException $e) { 
             print "Error!: " . $e->getMessage(); 
