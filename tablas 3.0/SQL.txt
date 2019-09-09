@@ -1,0 +1,79 @@
+SELECT art.id_articulo, mmm.id_mar_mod, amo.id_motor
+FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art
+WHERE amo.id_motor = mmm.id_motor
+AND amo.id_articulo = SUBSTRING(art.id_articulo, 1, 7)
+LIMIT 30
+
+
+SELECT art.id_articulo, lin.linea, mar.marca, com.combustible, mot.motor, mam.modelo, mot.cilindrada, tci.competicion, pro.producto, app.aplicacion   
+
+FROM articulos art                                                                                        
+
+INNER JOIN art_motor amo ON amo.id_articulo = substring(art.id_articulo,1,7)                                                                              
+
+INNER JOIN marcas_modelos_motores mmm ON mmm.id_motor = amo.id_motor                                                                                       
+
+INNER JOIN marca_y_modelos mam ON mam.id_marca_y_modelo = mmm.id_marca_y_modelo                                                                                          
+
+INNER JOIN marcas mar ON mar.id_marca = mam.id_marca                                                                                     
+
+INNER JOIN lineas lin ON lin.id_linea = mar.id_linea                                                                                      
+
+INNER JOIN motores mot ON mot.id_motor = mmm.id_motor                                                                                
+
+INNER JOIN combustibles com ON com.id_combustible = mot.id_combustible                                                                                
+
+INNER JOIN juntas_de_tapa tci ON tci.id_articulo = art.id_articulo                                                                                         
+
+INNER JOIN productos pro ON pro.id_producto = art.id_producto                                                                                         
+
+INNER JOIN aplicaciones app ON app.id_aplicacion = art.id_aplicacion                                                                                 
+
+WHERE art.id_aplicacion = "app0100" AND art.no_comercializable = 0                                                                                 
+
+LIMIT 50                                                                                            
+
+                                                                                             
+
+                                                                                             
+
+                                                                                             
+
+SELECT art.id_articulo, lin.linea, mar.marca, com.combustible, mot.motor, mam.modelo, mot.cilindrada, tci.competicion, pro.producto, app.aplicacion   
+
+FROM articulos art                                                                                        
+
+LEFT JOIN art_motor amo ON amo.id_articulo = substring(art.id_articulo,1,7)                                                                                  
+
+LEFT JOIN marcas_modelos_motores mmm ON mmm.id_motor = amo.id_motor                                                                                          
+
+LEFT JOIN marca_y_modelos mam ON mam.id_marca_y_modelo = mmm.id_marca_y_modelo                                                                             
+
+LEFT JOIN marcas mar ON mar.id_marca = mam.id_marca                                                                                         
+
+LEFT JOIN lineas lin ON lin.id_linea = mar.id_linea                                                                                         
+
+LEFT JOIN motores mot ON mot.id_motor = mmm.id_motor                                                                                    
+
+LEFT JOIN combustibles com ON com.id_combustible = mot.id_combustible                                                                                    
+
+LEFT JOIN juntas_de_tapa tci ON tci.id_articulo = art.id_articulo                                                                                             
+
+LEFT JOIN productos pro ON pro.id_producto = art.id_producto                                                                                             
+
+LEFT JOIN aplicaciones app ON app.id_aplicacion = art.id_aplicacion                                                                                     
+
+WHERE art.id_aplicacion = "app0100" AND art.no_comercializable = 0                                                                                 
+
+LIMIT 50
+
+ 
+
+SELECT art.id_articulo AS 'CODIGO MEYRO', mmm.id_marca_y_modelo AS 'MARCA Y MODELO' , amo.id_motor 'AS MOTOR'
+
+FROM art_motor amo, articulos art, marcas_modelos_motores mmm
+
+WHERE amo.id_articulo = art.id_articulo
+
+AND mmm.id_motor = amo.id_motor                      
+

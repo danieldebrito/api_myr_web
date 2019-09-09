@@ -10,8 +10,7 @@ require './entities/articulo/articuloApi.php';
 require './entities/aplicacion/aplicacionApi.php';
 require './entities/art_mar_mod_mot/art_mar_mod_motApi.php';
 require './entities/usuario/userApi.php';
-
-
+require './entities/cliente/clienteApi.php';
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -23,6 +22,8 @@ $app->get("/", function() {
   <p style='font-size:50px;'>Hola mundo desde api_meyro_web_test</p> 
   <br> <br> 
   <p style='font-family:courier;'>Conexion ok con la API.</p>
+
+  http://localhost/api_myr_web/app/clientes/
   ";
 });
 
@@ -65,6 +66,16 @@ $app->group('/user', function () {
     }
   */
 
+});
+
+$app->group('/clientes', function () {
+  $this->get('/', \clienteApi::class . ':readAllApi');
+  $this->get('/{id}', \clienteApi::class . ':readApi');
+  $this->post('/', \clienteApi::class . ':createApi');
+  $this->delete('/{id}[/]', \clienteApi::class . ':deleteApi');
+  $this->post('/update', \clienteApi::class . ':updateApi');
+
+  $this->post('/login[/]', \clienteApi::class . ':LoginCliente');
 });
 
 $app->add(function ($req, $res, $next) {
