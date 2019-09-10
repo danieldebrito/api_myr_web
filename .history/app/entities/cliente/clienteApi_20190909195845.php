@@ -30,6 +30,7 @@ class clienteApi extends cliente implements IApiCRUD {
 		$entity->email = $ArrayDeParametros['email'];
 		$entity->clave = $ArrayDeParametros['clave'];
 		$entity->estado = $ArrayDeParametros['estado'];
+		$entity->coeficiente_dtos = $ArrayDeParametros['coeficiente_dtos'];
 		  
 		$response = $entity->create();
 
@@ -49,6 +50,7 @@ class clienteApi extends cliente implements IApiCRUD {
 	  	$entity->email = $ArrayDeParametros['email'];
 	  	$entity->clave = $ArrayDeParametros['clave'];
 	  	$entity->estado = $ArrayDeParametros['estado'];
+	  	$entity->coeficiente_dtos = $ArrayDeParametros['coeficiente_dtos'];
 
 		$resultado = $entity->update();
 		

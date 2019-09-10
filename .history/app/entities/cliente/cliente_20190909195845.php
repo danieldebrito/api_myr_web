@@ -8,6 +8,7 @@ class cliente
 	public $email;
 	public $clave;
 	public $estado;
+	public $coeficiente_dtos;
 
   	public static function readAll () {
 		try {
@@ -47,9 +48,9 @@ class cliente
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta(
 				"INSERT INTO `clientes`
-				(`id`, `cuit`, `razonSocial`, `comprador`, `email`, `clave`, `estado`)
+				(`id`, `cuit`, `razonSocial`, `comprador`, `email`, `clave`, `estado`, `coeficiente_dtos` )
 				VALUES
-				(:id,:cuit, :razonSocial, :comprador, :email, :clave, :estado)"
+				(:id,:cuit, :razonSocial, :comprador, :email, :clave, :estado, :coeficiente_dtos)"
 			);
 			$consulta->bindValue(':id', $this->id, PDO::PARAM_STR);
 			$consulta->bindValue(':cuit', $this->cuit, PDO::PARAM_STR);
@@ -58,6 +59,7 @@ class cliente
 			$consulta->bindValue(':email', $this->email, PDO::PARAM_STR);
 			$consulta->bindValue(':clave', $this->clave, PDO::PARAM_STR);
 			$consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
+			$consulta->bindValue(':coeficiente_dtos', $this->coeficiente_dtos, PDO::PARAM_INT);
 			
 			$consulta->execute();
 
@@ -78,7 +80,8 @@ class cliente
                 `comprador` = :comprador, 
                 `email` = :email,
 				`clave` = :clave,
-				`estado` = :estado
+				`estado` = :estado,
+				`coeficiente_dtos` = :coeficiente_dtos 
 				WHERE `id` = :id");
                 
 				$consulta->bindValue(':id', $this->id, PDO::PARAM_STR);
@@ -88,6 +91,7 @@ class cliente
 				$consulta->bindValue(':email', $this->email, PDO::PARAM_STR);
 				$consulta->bindValue(':clave', $this->clave, PDO::PARAM_STR);
 				$consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
+				$consulta->bindValue(':coeficiente_dtos', $this->coeficiente_dtos, PDO::PARAM_INT);
         
         return $consulta->execute();
     }
