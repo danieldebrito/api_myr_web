@@ -1,13 +1,13 @@
 <?php
-class art_mar_mod_mot
-{
-
-    public static function readAll()
-    {
+class art_mar_mod_mot{
+    public static function readAll(){
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta
-            ("SELECT art.id_articulo, mar.marca, mot.id_combustible, amo.id_motor, mam.modelo, mot.cilindrada, mar.id_linea, art.competicion, art.id_producto, art.id_aplicacion
+            ("SELECT art.id_articulo AS articulo, mar.id_linea AS linea, mar.marca AS marca, 
+            mot.id_combustible AS combustible, amo.id_motor AS motor, mam.modelo as modelo,
+            mot.cilindrada AS cilindrada, art.competicion AS competicion, art.id_producto AS producto, 
+            art.id_aplicacion AS aplicacion
             FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art, mar_mod mam, motores mot, marcas mar
             WHERE amo.id_motor = mmm.id_motor
             AND mam.id_mar_mod = mmm.id_mar_mod
@@ -27,11 +27,10 @@ class art_mar_mod_mot
         }
     }
 
-    public function readParams($linea, $marca, $combustible, $motor, $modelo, $cilindrada, $competicion, $producto, $aplicacion)
-    {
+    public function readParams($linea, $marca, $combustible, $motor, $modelo, $cilindrada, $competicion, $producto, $aplicacion){
 
         $instruccionSQL =
-        'SELECT art.id_articulo, mar.id_linea, mar.id_marca, mot.id_combustible, amo.id_motor, 
+        'SELECT mar.id_linea AS linea, art.id_articulo,  mar.id_marca, mot.id_combustible, amo.id_motor, 
         mam.modelo, mot.cilindrada, art.competicion, art.id_producto, art.id_aplicacion
         FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art, mar_mod mam, motores mot, marcas mar
         WHERE amo.id_motor = mmm.id_motor

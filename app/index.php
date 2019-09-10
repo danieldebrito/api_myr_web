@@ -11,6 +11,7 @@ require './entities/aplicacion/aplicacionApi.php';
 require './entities/art_mar_mod_mot/art_mar_mod_motApi.php';
 require './entities/usuario/userApi.php';
 require './entities/cliente/clienteApi.php';
+require './entities/cliente_sucursal/cliente_sucursalApi.php';
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -57,15 +58,11 @@ $app->group('/user', function () {
 
   $this->post('/login[/]', \userApi::class . ':LoginUser');
 
-  /*
-    body + raw  + 
-
+  /* body + raw  + 
     {
       "userName":"ddebrito",
       "pass":"1388"
-    }
-  */
-
+    } */
 });
 
 $app->group('/clientes', function () {
@@ -76,6 +73,14 @@ $app->group('/clientes', function () {
   $this->post('/update', \clienteApi::class . ':updateApi');
 
   $this->post('/login[/]', \clienteApi::class . ':LoginCliente');
+});
+
+$app->group('/cliente_sucursal', function () {
+  $this->get('/', \cliente_sucursalApi::class . ':readAllApi');
+  $this->get('/{id}', \cliente_sucursalApi::class . ':readApi');
+  $this->post('/', \cliente_sucursalApi::class . ':createApi');
+  $this->delete('/{id}[/]', \cliente_sucursalApi::class . ':deleteApi');
+  $this->post('/update', \cliente_sucursalApi::class . ':updateApi');
 });
 
 $app->add(function ($req, $res, $next) {
