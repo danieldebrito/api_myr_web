@@ -17,7 +17,7 @@ class cliente
 			);
 			$consulta->execute();
 					
-			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS, "Cliente");
+			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS, "cliente");
 		} catch (Exception $e) {
 			$mensaje = $e->getMessage();
 			$respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");

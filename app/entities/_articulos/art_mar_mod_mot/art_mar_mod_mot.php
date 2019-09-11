@@ -5,7 +5,7 @@ class art_mar_mod_mot{
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta
             ("SELECT art.id_articulo, mar.id_linea, mar.id_marca, mot.id_combustible, 
-            amo.id_motor, mam.modelo, mot.cilindrada, art.competicion, art.id_producto, 
+            mot.motor , mam.modelo, mot.cilindrada, art.competicion, art.id_producto, 
             art.id_aplicacion
             FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art, mar_mod mam, motores mot, marcas mar
             WHERE amo.id_motor = mmm.id_motor
@@ -29,8 +29,9 @@ class art_mar_mod_mot{
     public function readParams($linea, $marca, $combustible, $motor, $modelo, $cilindrada, $competicion, $producto, $aplicacion){
 
         $instruccionSQL =
-        'SELECT mar.id_linea, art.id_articulo, mar.id_marca, mot.id_combustible, amo.id_motor, 
-        mam.modelo, mot.cilindrada, art.competicion, art.id_producto, art.id_aplicacion
+        'SELECT SELECT art.id_articulo, mar.id_linea, mar.id_marca, mot.id_combustible, 
+        mot.motor , mam.modelo, mot.cilindrada, art.competicion, art.id_producto, 
+        art.id_aplicacion
         FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art, mar_mod mam, motores mot, marcas mar
         WHERE amo.id_motor = mmm.id_motor
         AND mam.id_mar_mod = mmm.id_mar_mod
@@ -87,99 +88,3 @@ class art_mar_mod_mot{
         return $consulta->fetchAll(PDO::FETCH_CLASS);
     }
 }
-
-/*
-
-public static function read($id_producto){
-try {
-$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-$consulta = $objetoAccesoDato->RetornarConsulta("
-SELECT *
-FROM `productos`
-WHERE `id_producto` = '$id_producto'
-");
-$consulta->execute();
-$ret = $consulta->fetchObject('producto');
-} catch (Exception $e) {
-$mensaje = $e->getMessage();
-$respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
-} finally {
-return $ret;
-}
-}
-
-public function create()
-{
-try {
-$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-$consulta = $objetoAccesoDato->RetornarConsulta("
-INSERT INTO `productos`
-(`id_producto`,
-`id_sector`,
-`producto`,
-`tiempo_preparacion`,
-`precio`)
-VALUES (
-:id_producto,
-:id_sector,
-:producto,
-:tiempo_preparacion,
-:precio)
-");
-
-$consulta->bindValue(':id_producto', $this->id_producto, PDO::PARAM_STR);
-$consulta->bindValue(':id_sector', $this->id_sector, PDO::PARAM_STR);
-$consulta->bindValue(':producto', $this->producto, PDO::PARAM_STR);
-$consulta->bindValue(':tiempo_preparacion', $this->tiempo_preparacion, PDO::PARAM_INT);
-$consulta->bindValue(':precio', $this->precio, PDO::PARAM_INT);
-
-$consulta->execute();
-} catch (Exception $e) {
-$mensaje = $e->getMessage();
-$respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
-} finally {
-return $objetoAccesoDato->RetornarUltimoIdInsertado();
-}
-}
-
-public static function delete($id_producto){
-try {
-$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-$consulta = $objetoAccesoDato->RetornarConsulta("
-DELETE FROM `productos`
-WHERE `id_producto` = '$id_producto'
-");
-$consulta->bindValue(':id_producto', $id_producto, PDO::PARAM_STR);
-$consulta->execute();
-$respuesta = array("Estado" => true, "Mensaje" => "Eliminado Correctamente");
-
-} catch (Exception $e) {
-$mensaje = $e->getMessage();
-$respuesta = array("Estado" => false, "Mensaje" => "$mensaje");
-
-} finally {
-return $respuesta;
-}
-}
-
-public function update()
-{
-$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-$consulta = $objetoAccesoDato->RetornarConsulta("
-UPDATE `productos`
-SET
-`id_sector`=:id_sector,
-`producto`=:producto,
-`tiempo_preparacion`=:tiempo_preparacion,
-`precio`=:precio
-WHERE id_producto=:id_producto");
-
-$consulta->bindValue(':id_producto', $this->id_producto, PDO::PARAM_STR);
-$consulta->bindValue(':id_sector', $this->id_sector, PDO::PARAM_STR);
-$consulta->bindValue(':producto', $this->producto, PDO::PARAM_STR);
-$consulta->bindValue(':tiempo_preparacion', $this->tiempo_preparacion, PDO::PARAM_INT);
-$consulta->bindValue(':precio', $this->precio, PDO::PARAM_INT);
-
-return $consulta->execute();
-}
- */

@@ -5,13 +5,16 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../composer/vendor/autoload.php';
 require './AccesoDatos.php';
 
-///////////////////   ENTITIES  ///////////
-require './entities/articulo/articuloApi.php';
-require './entities/aplicacion/aplicacionApi.php';
-require './entities/art_mar_mod_mot/art_mar_mod_motApi.php';
+/////////////////////////////   entities  //////////////////////////////////
+require './entities/_articulos/articulo/articuloApi.php';
+require './entities/_articulos/aplicacion/aplicacionApi.php';
+require './entities/_articulos/art_mar_mod_mot/art_mar_mod_motApi.php';
+require './entities/_clientes/cliente/clienteApi.php';
+require './entities/_clientes/cliente_sucursal/cliente_sucursalApi.php';
+require './entities/_clientes/expreso/expresoApi.php';
+require './entities/_clientes/pedido/pedidoApi.php';
+require './entities/_clientes/pedido_detalle/pedido_detalleApi.php';
 require './entities/usuario/userApi.php';
-require './entities/cliente/clienteApi.php';
-require './entities/cliente_sucursal/cliente_sucursalApi.php';
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -24,7 +27,7 @@ $app->get("/", function() {
   <br> <br> 
   <p style='font-family:courier;'>Conexion ok con la API.</p>
 
-  http://localhost/api_myr_web/app/clientes/
+  http://localhost/api_myr_web/app/
   ";
 });
 
@@ -75,12 +78,36 @@ $app->group('/clientes', function () {
   $this->post('/login[/]', \clienteApi::class . ':LoginCliente');
 });
 
-$app->group('/cliente_sucursal', function () {
+$app->group('/cliente_sucursales', function () {
   $this->get('/', \cliente_sucursalApi::class . ':readAllApi');
   $this->get('/{id}', \cliente_sucursalApi::class . ':readApi');
   $this->post('/', \cliente_sucursalApi::class . ':createApi');
   $this->delete('/{id}[/]', \cliente_sucursalApi::class . ':deleteApi');
   $this->post('/update', \cliente_sucursalApi::class . ':updateApi');
+});
+
+$app->group('/expresos', function () {
+  $this->get('/', \expresoApi::class . ':readAllApi');
+  $this->get('/{id}', \expresoApi::class . ':readApi');
+  $this->post('/', \expresoApi::class . ':createApi');
+  $this->delete('/{id}[/]', \expresoApi::class . ':deleteApi');
+  $this->post('/update', \expresoApi::class . ':updateApi');
+});
+
+$app->group('/pedidos', function () {
+  $this->get('/', \pedidoApi::class . ':readAllApi');
+  $this->get('/{id}', \pedidoApi::class . ':readApi');
+  $this->post('/', \pedidoApi::class . ':createApi');
+  $this->delete('/{id}[/]', \pedidoApi::class . ':deleteApi');
+  $this->post('/update', \pedidoApi::class . ':updateApi');
+});
+
+$app->group('/pedidos_detalle', function () {
+  $this->get('/', \pedido_detalleApi::class . ':readAllApi');
+  $this->get('/{id}', \pedido_detalleApi::class . ':readApi');
+  $this->post('/', \pedido_detalleApi::class . ':createApi');
+  $this->delete('/{id}[/]', \pedido_detalleApi::class . ':deleteApi');
+  $this->post('/update', \pedido_detalleApi::class . ':updateApi');
 });
 
 $app->add(function ($req, $res, $next) {
