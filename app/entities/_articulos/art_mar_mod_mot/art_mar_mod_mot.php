@@ -29,7 +29,7 @@ class art_mar_mod_mot{
     public function readParams($linea, $marca, $combustible, $motor, $modelo, $cilindrada, $competicion, $producto, $aplicacion){
 
         $instruccionSQL =
-        'SELECT SELECT art.id_articulo, mar.id_linea, mar.id_marca, mot.id_combustible, 
+        'SELECT art.id_articulo, mar.id_linea, mar.id_marca, mot.id_combustible, 
         mot.motor , mam.modelo, mot.cilindrada, art.competicion, art.id_producto, 
         art.id_aplicacion
         FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art, mar_mod mam, motores mot, marcas mar
@@ -52,7 +52,7 @@ class art_mar_mod_mot{
         }
 
         if ($motor != null) {
-            $instruccionSQL = $instruccionSQL . ' AND ' . 'amo.id_motor = ' . "'" . $motor . "'";
+            $instruccionSQL = $instruccionSQL . ' AND ' . 'mot.motor = ' . "'" . $motor . "'";
         }
 
         if ($modelo != null) {
@@ -77,7 +77,7 @@ class art_mar_mod_mot{
 
         $instruccionSQL = $instruccionSQL . ' LIMIT 30';
 
-        //var_dump('</br></br> <b>INSTRUCCION SQL: </b>'.$instruccionSQL);
+        // var_dump('</br></br> <b>INSTRUCCION SQL: </b>'.$instruccionSQL);
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("
