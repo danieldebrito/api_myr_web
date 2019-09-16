@@ -26,7 +26,7 @@ class articulo
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta("
-			SELECT * FROM `articulos` WHERE 1 LIMIT 0, 5  
+			SELECT * FROM `articulos` 
 			");
             $consulta->execute();
             $ret = $consulta->fetchAll(PDO::FETCH_CLASS, "articulo");
