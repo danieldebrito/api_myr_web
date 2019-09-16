@@ -6,15 +6,21 @@ require '../composer/vendor/autoload.php';
 require './AccesoDatos.php';
 
 /////////////////////////////   entities  //////////////////////////////////
+//-----------------------------------------------------------------------//
 require './entities/_articulos/articulo/articuloApi.php';
 require './entities/_articulos/aplicacion/aplicacionApi.php';
 require './entities/_articulos/art_mar_mod_mot/art_mar_mod_motApi.php';
+require './entities/_articulos/producto/productoApi.php';
+//------------------------------------------------------------------------//
 require './entities/_clientes/cliente/clienteApi.php';
 require './entities/_clientes/cliente_sucursal/cliente_sucursalApi.php';
 require './entities/_clientes/expreso/expresoApi.php';
 require './entities/_clientes/pedido/pedidoApi.php';
 require './entities/_clientes/pedido_detalle/pedido_detalleApi.php';
+//-----------------------------------------------------------------------//
 require './entities/usuario/userApi.php';
+//-----------------------------------------------------------------------//
+
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -108,6 +114,14 @@ $app->group('/pedidos_detalle', function () {
   $this->post('/', \pedido_detalleApi::class . ':createApi');
   $this->delete('/{id}[/]', \pedido_detalleApi::class . ':deleteApi');
   $this->post('/update', \pedido_detalleApi::class . ':updateApi');
+});
+
+$app->group('/productos', function () {
+  $this->get('/', \productoApi::class . ':readAllApi');
+  $this->get('/{id}', \productoApi::class . ':readApi');
+  $this->post('/', \productoApi::class . ':createApi');
+  $this->delete('/{id}[/]', \productoApi::class . ':deleteApi');
+  $this->post('/update', \productoApi::class . ':updateApi');
 });
 
 $app->add(function ($req, $res, $next) {
