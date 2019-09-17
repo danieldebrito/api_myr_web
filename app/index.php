@@ -11,6 +11,7 @@ require './entities/_articulos/articulo/articuloApi.php';
 require './entities/_articulos/aplicacion/aplicacionApi.php';
 require './entities/_articulos/art_mar_mod_mot/art_mar_mod_motApi.php';
 require './entities/_articulos/producto/productoApi.php';
+require './entities/_articulos/marca/marcaApi.php';
 //------------------------------------------------------------------------//
 require './entities/_clientes/cliente/clienteApi.php';
 require './entities/_clientes/cliente_sucursal/cliente_sucursalApi.php';
@@ -122,6 +123,14 @@ $app->group('/productos', function () {
   $this->post('/', \productoApi::class . ':createApi');
   $this->delete('/{id}[/]', \productoApi::class . ':deleteApi');
   $this->post('/update', \productoApi::class . ':updateApi');
+});
+
+$app->group('/marcas', function () {
+  $this->get('/', \marcaApi::class . ':readAllApi');
+  $this->get('/{id}', \marcaApi::class . ':readApi');
+  $this->post('/', \marcaApi::class . ':createApi');
+  $this->delete('/{id}[/]', \marcaApi::class . ':deleteApi');
+  $this->post('/update', \marcaApi::class . ':updateApi');
 });
 
 $app->add(function ($req, $res, $next) {
