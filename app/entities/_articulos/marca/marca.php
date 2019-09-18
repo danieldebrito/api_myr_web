@@ -1,5 +1,5 @@
 <?php
-class marcas
+class marca
 {
 	public $id_marca;
 	public $id_linea;
@@ -44,12 +44,12 @@ class marcas
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta(
 				"INSERT INTO `marcas`
-				(`id_marca`, `id_linea`, `marca`,`rotacion` )
+				(`id_marca`, `id_linea`, `marca`, `rotacion`)
 				VALUES
-				(:id_marca, :producto, :marca, :rotacion)"
+				(:id_marca, :id_linea, :marca, :rotacion)"
 			);
 
-			$consulta->bindValue(':id_marca', $this->id_marca, PDO::PARAM_STR);
+			$consulta->bindValue(':id_marca', $this->id_marca, PDO::PARAM_INT);
 			$consulta->bindValue(':id_linea', $this->id_linea, PDO::PARAM_STR);
 			$consulta->bindValue(':marca', $this->marca, PDO::PARAM_STR);
 			$consulta->bindValue(':rotacion', $this->rotacion, PDO::PARAM_STR);
