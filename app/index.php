@@ -12,6 +12,8 @@ require './entities/_articulos/aplicacion/aplicacionApi.php';
 require './entities/_articulos/art_mar_mod_mot/art_mar_mod_motApi.php';
 require './entities/_articulos/producto/productoApi.php';
 require './entities/_articulos/marca/marcaApi.php';
+require './entities/_articulos/linea/lineaApi.php';
+require './entities/_articulos/combustible/combustibleApi.php';
 //------------------------------------------------------------------------//
 require './entities/_clientes/cliente/clienteApi.php';
 require './entities/_clientes/cliente_sucursal/cliente_sucursalApi.php';
@@ -131,6 +133,22 @@ $app->group('/marcas', function () {
   $this->post('/', \marcaApi::class . ':createApi');
   $this->delete('/{id}[/]', \marcaApi::class . ':deleteApi');
   $this->post('/update', \marcaApi::class . ':updateApi');
+});
+
+$app->group('/lineas', function () {
+  $this->get('/', \lineaApi::class . ':readAllApi');
+  $this->get('/{id}', \lineaApi::class . ':readApi');
+  $this->post('/', \lineaApi::class . ':createApi');
+  $this->delete('/{id}[/]', \lineaApi::class . ':deleteApi');
+  $this->post('/update', \lineaApi::class . ':updateApi');
+});
+
+$app->group('/combustibles', function () {
+  $this->get('/', \combustibleApi::class . ':readAllApi');
+  $this->get('/{id}', \combustibleApi::class . ':readApi');
+  $this->post('/', \combustibleApi::class . ':createApi');
+  $this->delete('/{id}[/]', \combustibleApi::class . ':deleteApi');
+  $this->post('/update', \combustibleApi::class . ':updateApi');
 });
 
 $app->add(function ($req, $res, $next) {
