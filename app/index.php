@@ -109,6 +109,8 @@ $app->group('/pedidos', function () {
   $this->post('/', \pedidoApi::class . ':createApi');
   $this->delete('/{id}[/]', \pedidoApi::class . ':deleteApi');
   $this->post('/update', \pedidoApi::class . ':updateApi');
+
+  $this->post('/abierto/{id_cliente}[/]', \pedidoApi::class . ':traePedidoAbiertoApi');
 });
 
 $app->group('/pedidos_detalle', function () {

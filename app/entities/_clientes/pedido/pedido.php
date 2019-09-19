@@ -116,5 +116,22 @@ class pedido
             return $respuesta;
         }
 	}
+
+	public static function traePedidoAbierto($id_cliente) {
+		try {
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta = $objetoAccesoDato->RetornarConsulta(
+				"SELECT * FROM `pedidos` WHERE `id_cliente` = $id_cliente AND `estado` = 'abierto'"
+			);
+			$consulta->execute();
+			$ret = $consulta->fetchObject("pedido");
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+	}
+
 }
 
