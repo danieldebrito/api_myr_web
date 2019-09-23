@@ -117,11 +117,13 @@ class pedido
         }
 	}
 
-	public static function traePedidoAbierto($id_cliente) {
+	/////////////////////////////////////-----////////////////////////////////////////////////////
+
+	public static function traePedidoAbierto($id) {
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `pedidos` WHERE `id_cliente` = $id_cliente AND `estado` = 'abierto'"
+				"SELECT * FROM `pedidos` WHERE `id_cliente` = $id AND `estado` = 'abierto'"
 			);
 			$consulta->execute();
 			$ret = $consulta->fetchObject("pedido");
@@ -133,5 +135,21 @@ class pedido
         }
 	}
 
+	public static function readAllCliente ($id) {
+		try {
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta = $objetoAccesoDato->RetornarConsulta(
+				"SELECT * FROM `pedidos` WHERE `id_cliente` = $id"
+			);
+			$consulta->execute();
+					
+			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS, "pedido");
+		} catch (Exception $e) {
+			$mensaje = $e->getMessage();
+			$respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+		} finally {
+			return $ret;
+		}		
+	}
 }
 

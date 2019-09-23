@@ -110,7 +110,9 @@ $app->group('/pedidos', function () {
   $this->delete('/{id}[/]', \pedidoApi::class . ':deleteApi');
   $this->post('/update', \pedidoApi::class . ':updateApi');
 
-  $this->post('/abierto/{id_cliente}[/]', \pedidoApi::class . ':traePedidoAbiertoApi');
+  $this->get('/abierto/{id}[/]', \pedidoApi::class . ':traePedidoAbiertoApi');
+  $this->get('/cliente/{id}[/]', \pedidoApi::class . ':readAllClienteApi');
+
 });
 
 $app->group('/pedidos_detalle', function () {
