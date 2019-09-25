@@ -36,7 +36,7 @@ $app->get("/", function() {
   <br> <br> 
   <p style='font-family:courier;'>Conexion ok con la API.</p>
 
-  http://localhost/api_myr_web/app/
+  http://localhost/api_myr_web/app/index.php/
   ";
 });
 
