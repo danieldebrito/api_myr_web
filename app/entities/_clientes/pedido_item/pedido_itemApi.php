@@ -1,11 +1,11 @@
 <?php
-require_once 'pedido_detalle.php';
+require_once 'pedido_item.php';
 require_once 'IApiCRUD.php';
 
-class pedido_detalleApi extends pedido_detalle implements IApiCRUD {
+class pedido_itemApi extends pedido_item implements IApiCRUD {
 	
 	public function readAllApi($request, $response, $args) {
-		$all=pedido_detalle::readAll();
+		$all=pedido_item::readAll();
 	   	$response = $response->withJson($all, 200);  
 		  
 		return $response;
@@ -13,7 +13,7 @@ class pedido_detalleApi extends pedido_detalle implements IApiCRUD {
 
 	public function readApi($request, $response, $args) {
 		$id=$args['id'];
-		$art=pedido_detalle::read($id);
+		$art=pedido_item::read($id);
 		$newResponse = $response->withJson($art, 200);  
 		
 		return $newResponse;
@@ -22,11 +22,13 @@ class pedido_detalleApi extends pedido_detalle implements IApiCRUD {
 	public function CreateApi($request, $response, $args) {
 		$ArrayDeParametros = $request->getParsedBody();
 
-		$entity = new pedido_detalle();
-		//$entity->id_pedido_detalle = $ArrayDeParametros['id_pedido_detalle'];
+		$entity = new pedido_item();
+		//$entity->id_pedido_item = $ArrayDeParametros['id_pedido_item'];
+	  	$entity->id_cliente = $ArrayDeParametros['id_cliente'];
 	  	$entity->id_pedido = $ArrayDeParametros['id_pedido'];
-	  	$entity->id_articulo = $ArrayDeParametros['id_articulo'];
+		$entity->id_articulo = $ArrayDeParametros['id_articulo'];
 		$entity->cantidad = $ArrayDeParametros['cantidad'];
+		$entity->estado = $ArrayDeParametros['estado'];
 		  
 		$response = $entity->create();
 
@@ -37,11 +39,13 @@ class pedido_detalleApi extends pedido_detalle implements IApiCRUD {
     {
 		$ArrayDeParametros = $request->getParsedBody();
 		
-		$entity = new pedido_detalle();
-		$entity->id_pedido_detalle = $ArrayDeParametros['id_pedido_detalle'];
+		$entity = new pedido_item();
+		$entity->id_pedido_item = $ArrayDeParametros['id_pedido_item'];
+	  	$entity->id_cliente = $ArrayDeParametros['id_cliente'];
 	  	$entity->id_pedido = $ArrayDeParametros['id_pedido'];
-	  	$entity->id_articulo = $ArrayDeParametros['id_articulo'];
+		$entity->id_articulo = $ArrayDeParametros['id_articulo'];
 		$entity->cantidad = $ArrayDeParametros['cantidad'];
+		$entity->estado = $ArrayDeParametros['estado'];
 
 		$resultado = $entity->update();
 		
@@ -53,7 +57,7 @@ class pedido_detalleApi extends pedido_detalle implements IApiCRUD {
 	
 	public function deleteApi($request, $response, $args){
         $id = $args["id"];
-        $respuesta = pedido_detalle::delete($id);
+        $respuesta = pedido_item::delete($id);
         $newResponse = $response->withJson($respuesta, 200);
         return $newResponse;
     }

@@ -13,7 +13,7 @@ class art_mar_mod_mot{
             AND mot.id_motor = mmm.id_motor
             AND mar.id_marca = mam.id_marca
             AND amo.id_articulo = SUBSTRING(art.id_articulo, 1, 7)
-            LIMIT 30
+            LIMIT 1000
 			");
             $consulta->execute();
             $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
@@ -75,7 +75,7 @@ class art_mar_mod_mot{
             $instruccionSQL = $instruccionSQL . ' AND ' . 'art.id_aplicacion = ' . "'" . $aplicacion . "'";
         }
 
-        $instruccionSQL = $instruccionSQL . ' LIMIT 30';
+        $instruccionSQL = $instruccionSQL . ' LIMIT 1000';
 
         // var_dump('</br></br> <b>INSTRUCCION SQL: </b>'.$instruccionSQL);
 

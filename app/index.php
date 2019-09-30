@@ -19,7 +19,7 @@ require './entities/_clientes/cliente/clienteApi.php';
 require './entities/_clientes/cliente_sucursal/cliente_sucursalApi.php';
 require './entities/_clientes/expreso/expresoApi.php';
 require './entities/_clientes/pedido/pedidoApi.php';
-require './entities/_clientes/pedido_detalle/pedido_detalleApi.php';
+require './entities/_clientes/pedido_item/pedido_itemApi.php';
 //-----------------------------------------------------------------------//
 require './entities/usuario/userApi.php';
 //-----------------------------------------------------------------------//
@@ -115,12 +115,12 @@ $app->group('/pedidos', function () {
 
 });
 
-$app->group('/pedidos_detalle', function () {
-  $this->get('/', \pedido_detalleApi::class . ':readAllApi');
-  $this->get('/{id}', \pedido_detalleApi::class . ':readApi');
-  $this->post('/', \pedido_detalleApi::class . ':createApi');
-  $this->delete('/{id}[/]', \pedido_detalleApi::class . ':deleteApi');
-  $this->post('/update', \pedido_detalleApi::class . ':updateApi');
+$app->group('/pedidos_item', function () {
+  $this->get('/', \pedido_itemApi::class . ':readAllApi');
+  $this->get('/{id}', \pedido_itemApi::class . ':readApi');
+  $this->post('/', \pedido_itemApi::class . ':createApi');
+  $this->delete('/{id}[/]', \pedido_itemApi::class . ':deleteApi');
+  $this->post('/update', \pedido_itemApi::class . ':updateApi');
 });
 
 $app->group('/productos', function () {

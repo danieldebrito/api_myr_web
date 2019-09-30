@@ -24,10 +24,8 @@ class pedidoApi extends pedido implements IApiCRUD {
 
 	  	$entity = new pedido();
 	  	// $entity->id_pedido = $ArrayDeParametros['id_pedido'];
-	  	$entity->id_cliente = $ArrayDeParametros['id_cliente'];
 		$entity->id_sucursal = $ArrayDeParametros['id_sucursal'];
 		$entity->id_expreso = $ArrayDeParametros['id_expreso'];
-		$entity->estado = $ArrayDeParametros['estado'];
 	  	$entity->envio = $ArrayDeParametros['envio'];
 	  	$entity->fecha = $ArrayDeParametros['fecha'];
 	  	$entity->observaciones = $ArrayDeParametros['observaciones'];
@@ -43,10 +41,8 @@ class pedidoApi extends pedido implements IApiCRUD {
 		
 		$entity = new pedido();
 		$entity->id_pedido = $ArrayDeParametros['id_pedido'];
-		$entity->id_cliente = $ArrayDeParametros['id_cliente'];
 	  	$entity->id_sucursal = $ArrayDeParametros['id_sucursal'];
 	 	$entity->id_expreso = $ArrayDeParametros['id_expreso'];
-	  	$entity->estado = $ArrayDeParametros['estado'];
 		$entity->envio = $ArrayDeParametros['envio'];
 		$entity->fecha = $ArrayDeParametros['fecha'];
 		$entity->observaciones = $ArrayDeParametros['observaciones'];
@@ -65,9 +61,12 @@ class pedidoApi extends pedido implements IApiCRUD {
         $newResponse = $response->withJson($respuesta, 200);
         return $newResponse;
 	}
-	
-	////////////////////////////////----///////////////////////////////////
+}
 
+
+/*
+////////////////////////////////----///////////////////////////////////
+	
 	public function traePedidoAbiertoApi($request, $response, $args) {
 		$id=$args['id'];
 		$art=pedido::traePedidoAbierto($id);
@@ -82,10 +81,8 @@ class pedidoApi extends pedido implements IApiCRUD {
 		$newResponse = $response->withJson($art, 200);  
 		
 		return $newResponse;
-	}
-}
+	}*/
 ?>
-
 
 
 
