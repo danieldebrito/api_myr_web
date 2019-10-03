@@ -60,7 +60,23 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
         $respuesta = pedido_item::delete($id);
         $newResponse = $response->withJson($respuesta, 200);
         return $newResponse;
-    }
+	}
+	
+	public function readAllClienteApi ($request, $response, $args) {
+        $id = $args["id"];
+		$all=pedido_item::readAllCliente($id);
+		$newResponse = $response->withJson($all, 200);
+
+		return $newResponse;
+	}
+
+	public function readAllClienteAbiertoApi ($request, $response, $args) {
+        $id = $args["id"];
+		$all=pedido_item::readAllClienteAbierto($id);
+		$newResponse = $response->withJson($all, 200);
+
+		return $newResponse;
+	}
 }
 ?>
 

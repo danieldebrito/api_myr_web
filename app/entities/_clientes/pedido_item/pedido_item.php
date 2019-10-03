@@ -106,5 +106,39 @@ class pedido_item
             return $respuesta;
         }
 	}
+
+	public static function readAllCliente ($id) {
+		try {
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta = $objetoAccesoDato->RetornarConsulta(
+				"SELECT * FROM `pedidos_item` WHERE `id_cliente` = $id"
+			);
+			$consulta->execute();
+					
+			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS, "pedido_item");
+		} catch (Exception $e) {
+			$mensaje = $e->getMessage();
+			$respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+		} finally {
+			return $ret;
+		}		
+	}
+
+	public static function readAllClienteAbierto ($id) {
+		try {
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta = $objetoAccesoDato->RetornarConsulta(
+				"SELECT * FROM `pedidos_item` WHERE `id_cliente` = $id AND `estado` = 'abierto'"
+			);
+			$consulta->execute();
+					
+			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS, "pedido_item");
+		} catch (Exception $e) {
+			$mensaje = $e->getMessage();
+			$respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+		} finally {
+			return $ret;
+		}		
+	}
 }
 
