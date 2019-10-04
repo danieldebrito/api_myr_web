@@ -4,7 +4,7 @@ class art_mar_mod_mot{
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta
-            ("SELECT art.id_articulo, mar.id_linea, mar.id_marca, mot.id_combustible, 
+            (/*"SELECT art.id_articulo, mar.id_linea, mar.id_marca, mot.id_combustible, 
             mot.motor , mam.modelo, mot.cilindrada, art.competicion, art.id_producto, 
             art.id_aplicacion
             FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art, mar_mod mam, motores mot, marcas mar
@@ -14,7 +14,9 @@ class art_mar_mod_mot{
             AND mar.id_marca = mam.id_marca
             AND amo.id_articulo = SUBSTRING(art.id_articulo, 1, 7)
             LIMIT 1000
-			");
+            "*/
+            "SELECT * FROM `artmarmodmot` WHERE 1"
+        );
             $consulta->execute();
             $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
 
@@ -29,7 +31,7 @@ class art_mar_mod_mot{
     public function readParams($linea, $marca, $combustible, $motor, $modelo, $cilindrada, $competicion, $producto, $aplicacion){
 
         $instruccionSQL =
-        'SELECT art.id_articulo, mar.id_linea, mar.id_marca, mot.id_combustible, 
+        /*'SELECT art.id_articulo, mar.id_linea, mar.id_marca, mot.id_combustible, 
         mot.motor , mam.modelo, mot.cilindrada, art.competicion, art.id_producto, 
         art.id_aplicacion
         FROM art_mar_mod_mot amo, mar_mod_mot mmm, articulos art, mar_mod mam, motores mot, marcas mar
@@ -37,7 +39,8 @@ class art_mar_mod_mot{
         AND mam.id_mar_mod = mmm.id_mar_mod
         AND mot.id_motor = mmm.id_motor
         AND mar.id_marca = mam.id_marca
-        AND amo.id_articulo = SUBSTRING(art.id_articulo, 1, 7)';
+        AND amo.id_articulo = SUBSTRING(art.id_articulo, 1, 7)'*/
+        'SELECT * FROM `artmarmodmot` WHERE 1';
 
         if ($linea != null) {
             $instruccionSQL = $instruccionSQL . ' AND ' . 'mar.id_linea = ' . "'" . $linea . "'";
