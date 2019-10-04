@@ -12,7 +12,9 @@ class pedido_item
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `pedidos_item`"
+				"SELECT p.id_pedido_item, p.id_cliente, p.id_pedido, p.id_articulo, p.cantidad, p.estado, a.descripcion_corta, a.stock, a.precio_lista
+				FROM articulos a, pedidos_item p
+				WHERE a.id_articulo = p.id_articulo"
 			);
 			$consulta->execute();
 					
@@ -29,7 +31,10 @@ class pedido_item
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `pedidos_item` WHERE id_pedido_item = $id"
+				"SELECT p.id_pedido_item, p.id_cliente, p.id_pedido, p.id_articulo, p.cantidad, p.estado, a.descripcion_corta, a.stock, a.precio_lista
+				FROM articulos a, pedidos_item p
+				WHERE a.id_articulo = p.id_articulo 
+				AND p.id_pedido_item = $id"
 			);
 			$consulta->execute();
 			$ret = $consulta->fetchObject("pedido_item");
@@ -111,7 +116,10 @@ class pedido_item
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `pedidos_item` WHERE `id_cliente` = $id"
+				"SELECT p.id_pedido_item, p.id_cliente, p.id_pedido, p.id_articulo, p.cantidad, p.estado, a.descripcion_corta, a.stock, a.precio_lista
+				FROM articulos a, pedidos_item p
+				WHERE a.id_articulo = p.id_articulo 
+				AND p.id_cliente = $id"
 			);
 			$consulta->execute();
 					
@@ -128,7 +136,11 @@ class pedido_item
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `pedidos_item` WHERE `id_cliente` = $id AND `estado` = 'abierto'"
+				"SELECT p.id_pedido_item, p.id_cliente, p.id_pedido, p.id_articulo, p.cantidad, p.estado, a.descripcion_corta, a.stock, a.precio_lista
+				FROM articulos a, pedidos_item p
+				WHERE a.id_articulo = p.id_articulo 
+				AND p.id_cliente = $id 
+				AND p.estado = 'abierto'"
 			);
 			$consulta->execute();
 					
