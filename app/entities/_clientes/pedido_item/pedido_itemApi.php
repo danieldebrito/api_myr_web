@@ -79,6 +79,7 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
 	}
 
 	public function updateItemsApi($request, $response, $args){
+		
 		$ArrayDeParametros = $request->getParsedBody();
 		
 		$entity = new pedido_item();
