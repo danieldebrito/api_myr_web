@@ -5,6 +5,9 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../composer/vendor/autoload.php';
 require './AccesoDatos.php';
 
+///////////////////   MIDDLEWARE  ///////////
+require_once './middleware/MWparaCORS.php';
+
 /////////////////////////////   entities  /////////////////////////////////
 //-----------------------------------------------------------------------//
 require './entities/_articulos/articulo/articuloApi.php';
@@ -59,7 +62,7 @@ $app->group('/articulos', function () {
 $app->group('/art_mar_mod_mot', function () {
   $this->get('/', \art_mar_mod_motApi::class . ':readAllApi');
   $this->post('/filtrar[/]', \art_mar_mod_motApi::class . ':readParamsApi');
-});
+})->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
 $app->group('/user', function () {
   $this->get('/', \userApi::class . ':readAllApi');
