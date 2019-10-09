@@ -127,7 +127,7 @@ $app->group('/pedidos_item', function () {
 
   $this->get('/cliente/{id}[/]', \pedido_itemApi::class . ':readAllClienteApi');
   $this->get('/clienteAbierto/{id}[/]', \pedido_itemApi::class . ':readAllClienteAbiertoApi');
-  $this->post('/updateItems', \pedido_itemApi::class . ':updateItemsApi');
+  $this->post('/updateItems[/]', \pedido_itemApi::class . ':updateItemsApi');
 });
 
 $app->group('/productos', function () {

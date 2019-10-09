@@ -153,20 +153,13 @@ class pedido_item
 		}		
 	}
 
-	public function updateItems(){
+	public function updateItems($id_pedido, $id_cliente){
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta(
 			"UPDATE `pedidos_item` 
 			SET `id_pedido`= $id_pedido, `estado`= 'en_curso' 
-			WHERE `id_cliente` = $id_cliente 
+			WHERE `id_cliente` = '$id_cliente'
 			AND `estado` = 'abierto'");
-                
-			// $consulta->bindValue(':id_pedido_item', $this->id_pedido_item, PDO::PARAM_INT);
-			$consulta->bindValue(':id_cliente', $this->id_cliente, PDO::PARAM_STR);
-			$consulta->bindValue(':id_pedido', $this->id_pedido, PDO::PARAM_INT);
-			// $consulta->bindValue(':id_articulo', $this->id_articulo, PDO::PARAM_STR);
-			// $consulta->bindValue(':cantidad', $this->cantidad, PDO::PARAM_INT);
-			$consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
 
         return $consulta->execute();
 	}
