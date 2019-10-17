@@ -127,6 +127,23 @@ class cliente_sucursal{
         } finally {
             return $respuesta;
         }
-    }
+	}
+	
+	public static function readAllCliente ($id) {
+		try {
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta = $objetoAccesoDato->RetornarConsulta(
+				"SELECT * FROM `cliente_sucursales` WHERE `id_cliente` = $id"
+			);
+			$consulta->execute();
+					
+			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS, "cliente_sucursal");
+		} catch (Exception $e) {
+			$mensaje = $e->getMessage();
+			$respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+		} finally {
+			return $ret;
+		}		
+	}
 }
 

@@ -96,6 +96,8 @@ $app->group('/cliente_sucursales', function () {
   $this->post('/', \cliente_sucursalApi::class . ':createApi');
   $this->delete('/{id}[/]', \cliente_sucursalApi::class . ':deleteApi');
   $this->post('/update', \cliente_sucursalApi::class . ':updateApi');
+
+  $this->get('/sucursales/{id}', \cliente_sucursalApi::class . ':readAllClienteApi');
 });
 
 $app->group('/expresos', function () {
