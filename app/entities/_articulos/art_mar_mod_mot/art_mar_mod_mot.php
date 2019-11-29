@@ -58,7 +58,7 @@ class art_mar_mod_mot{
             $instruccionSQL = $instruccionSQL . ' AND ' . 'id_aplicacion = ' . "'" . $aplicacion . "'";
         }
 
-        $instruccionSQL = $instruccionSQL . ' LIMIT 1000';
+        // $instruccionSQL = $instruccionSQL . ' LIMIT 1000000';
 
         // var_dump('</br></br> <b>INSTRUCCION SQL: </b>'.$instruccionSQL);
 
