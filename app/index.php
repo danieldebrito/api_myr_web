@@ -17,6 +17,8 @@ require './entities/_articulos/producto/productoApi.php';
 require './entities/_articulos/marca/marcaApi.php';
 require './entities/_articulos/linea/lineaApi.php';
 require './entities/_articulos/combustible/combustibleApi.php';
+require './entities/_articulos/cards/cardsApi.php';
+
 //------------------------------------------------------------------------//
 require './entities/_clientes/cliente/clienteApi.php';
 require './entities/_clientes/cliente_sucursal/cliente_sucursalApi.php';
@@ -62,6 +64,11 @@ $app->group('/articulos', function () {
 $app->group('/art_mar_mod_mot', function () {
   $this->get('/', \art_mar_mod_motApi::class . ':readAllApi');
   $this->post('/filtrar[/]', \art_mar_mod_motApi::class . ':readParamsApi');
+})->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+
+$app->group('/cards', function () {
+  $this->get('/', \cardsApi::class . ':readAllApi');
+  $this->post('/filtrar[/]', \cardsApi::class . ':readParamsApi');
 })->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
 $app->group('/user', function () {
