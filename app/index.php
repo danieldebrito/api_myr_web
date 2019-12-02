@@ -117,7 +117,6 @@ $app->group('/pedidos', function () {
 
   $this->get('/abierto/{id}[/]', \pedidoApi::class . ':traePedidoAbiertoApi');
   $this->get('/cliente/{id}[/]', \pedidoApi::class . ':readAllClienteApi');
-
 });
 
 $app->group('/pedidos_item', function () {
