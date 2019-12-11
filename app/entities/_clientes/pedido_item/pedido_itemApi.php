@@ -33,8 +33,7 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
 	  	return $response;
 	}
 
-	public function updateApi($request, $response, $args)
-    {
+	public function updateApi($request, $response, $args) {
 		$ArrayDeParametros = $request->getParsedBody();
 		
 		$entity = new pedido_item();
@@ -51,7 +50,7 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
         return $response->withJson($objDelaRespuesta, 200);
 	}
 	
-	public function deleteApi($request, $response, $args){
+	public function deleteApi($request, $response, $args) {
         $id = $args["id"];
         $respuesta = pedido_item::delete($id);
         $newResponse = $response->withJson($respuesta, 200);

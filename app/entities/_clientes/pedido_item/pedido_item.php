@@ -62,7 +62,7 @@ class pedido_item
         }
 	}
 
-	public function update(){
+	public function update() {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta(
 				"UPDATE `pedidos_item` SET 
@@ -79,7 +79,7 @@ class pedido_item
         return $consulta->execute();
 	}
 	
-	public static function delete($id){
+	public static function delete($id) {
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta(
