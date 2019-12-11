@@ -2,15 +2,19 @@
 class pedido_item
 {
 	public $id_pedido_item;
+	public $id_cliente;
 	public $id_pedido;
 	public $id_articulo;
 	public $cantidad;
+	public $estado;
 
   	public static function readAll () {
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `pedidos_item` WHERE 1"
+				"SELECT p.id_pedido_item, p.id_cliente, p.id_pedido, p.id_articulo, p.cantidad, p.estado, a.descripcion_corta, a.stock, a.precio_lista
+				FROM articulos a, pedidos_item p
+				WHERE a.id_articulo = p.id_articulo"
 			);
 			$consulta->execute();
 					
@@ -27,7 +31,10 @@ class pedido_item
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `pedidos_item` WHERE `id_pedido_item` = $id"
+				"SELECT p.id_pedido_item, p.id_cliente, p.id_pedido, p.id_articulo, p.cantidad, p.estado, a.descripcion_corta, a.stock, a.precio_lista
+				FROM articulos a, pedidos_item p
+				WHERE a.id_articulo = p.id_articulo 
+				AND p.id_pedido_item = $id"
 			);
 			$consulta->execute();
 			$ret = $consulta->fetchObject("pedido_item");
@@ -44,14 +51,16 @@ class pedido_item
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta(
 				"INSERT INTO `pedidos_item`
-				(`id_pedido`, `id_articulo`, `cantidad`)
+				(`id_cliente`, `id_pedido`, `id_articulo`, `cantidad`, `estado`)
 				VALUES
-				(:id_pedido, :id_articulo, :cantidad)"
+				(:id_cliente, :id_pedido, :id_articulo, :cantidad, :estado)"
 			);
 			// $consulta->bindValue(':id_pedido_item', $this->id_pedido_item, PDO::PARAM_INT); ai
+			$consulta->bindValue(':id_cliente', $this->id_cliente, PDO::PARAM_STR);
 			$consulta->bindValue(':id_pedido', $this->id_pedido, PDO::PARAM_INT);
 			$consulta->bindValue(':id_articulo', $this->id_articulo, PDO::PARAM_STR);
 			$consulta->bindValue(':cantidad', $this->cantidad, PDO::PARAM_INT);
+			$consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
 			$consulta->execute();
 
         } catch (Exception $e) {
@@ -66,15 +75,19 @@ class pedido_item
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta(
 				"UPDATE `pedidos_item` SET 
+				`id_cliente` = :id_cliente, 
 				`id_pedido` = :id_pedido, 
 				`id_articulo` = :id_articulo, 
-				`cantidad` = :cantidad
+				`cantidad` = :cantidad, 
+                `estado` = :estado
 				WHERE `id_pedido_item` = :id_pedido_item");
                 
 			$consulta->bindValue(':id_pedido_item', $this->id_pedido_item, PDO::PARAM_INT);
+			$consulta->bindValue(':id_cliente', $this->id_cliente, PDO::PARAM_STR);
 			$consulta->bindValue(':id_pedido', $this->id_pedido, PDO::PARAM_INT);
 			$consulta->bindValue(':id_articulo', $this->id_articulo, PDO::PARAM_STR);
 			$consulta->bindValue(':cantidad', $this->cantidad, PDO::PARAM_INT);
+			$consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
 
         return $consulta->execute();
 	}
@@ -98,8 +111,6 @@ class pedido_item
             return $respuesta;
         }
 	}
-
-	/*
 
 	public static function readAllCliente ($id) {
 		try {
@@ -151,6 +162,6 @@ class pedido_item
 			AND `estado` = 'abierto'");
 
         return $consulta->execute();
-	}*/
+	}
 }
 

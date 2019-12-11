@@ -26,7 +26,7 @@ class pedidoApi extends pedido implements IApiCRUD {
 	  	// $entity->id_pedido = $ArrayDeParametros['id_pedido'];
 		$entity->id_sucursal = $ArrayDeParametros['id_sucursal'];
 		$entity->id_expreso = $ArrayDeParametros['id_expreso'];
-	  	$entity->envio = $ArrayDeParametros['envio'];
+	  	$entity->estado = $ArrayDeParametros['estado'];
 	  	$entity->fecha = $ArrayDeParametros['fecha'];
 	  	$entity->observaciones = $ArrayDeParametros['observaciones'];
 		  
@@ -43,7 +43,7 @@ class pedidoApi extends pedido implements IApiCRUD {
 		$entity->id_pedido = $ArrayDeParametros['id_pedido'];
 	  	$entity->id_sucursal = $ArrayDeParametros['id_sucursal'];
 	 	$entity->id_expreso = $ArrayDeParametros['id_expreso'];
-		$entity->envio = $ArrayDeParametros['envio'];
+		$entity->estado = $ArrayDeParametros['estado'];
 		$entity->fecha = $ArrayDeParametros['fecha'];
 		$entity->observaciones = $ArrayDeParametros['observaciones'];
 

@@ -24,9 +24,11 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
 
 		$entity = new pedido_item();
 		//$entity->id_pedido_item = $ArrayDeParametros['id_pedido_item'];
+	  	$entity->id_cliente = $ArrayDeParametros['id_cliente'];
 	  	$entity->id_pedido = $ArrayDeParametros['id_pedido'];
 		$entity->id_articulo = $ArrayDeParametros['id_articulo'];
 		$entity->cantidad = $ArrayDeParametros['cantidad'];
+		$entity->estado = $ArrayDeParametros['estado'];
 		  
 		$response = $entity->create();
 
@@ -39,9 +41,11 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
 		
 		$entity = new pedido_item();
 		$entity->id_pedido_item = $ArrayDeParametros['id_pedido_item'];
+	  	$entity->id_cliente = $ArrayDeParametros['id_cliente'];
 	  	$entity->id_pedido = $ArrayDeParametros['id_pedido'];
 		$entity->id_articulo = $ArrayDeParametros['id_articulo'];
 		$entity->cantidad = $ArrayDeParametros['cantidad'];
+		$entity->estado = $ArrayDeParametros['estado'];
 
 		$resultado = $entity->update();
 		
@@ -57,8 +61,6 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
         $newResponse = $response->withJson($respuesta, 200);
         return $newResponse;
 	}
-
-	/*
 	
 	public function readAllClienteApi ($request, $response, $args) {
         $id = $args["id"];
@@ -87,7 +89,7 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
 		$newResponse = $response->withJson($all, 200);
 
 		return $newResponse;
-	}*/
+	}
 }
 ?>
 
