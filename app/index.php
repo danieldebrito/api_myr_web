@@ -123,8 +123,7 @@ $app->group('/pedidos', function () {
   $this->post('/update', \pedidoApi::class . ':updateApi');
 /*
   $this->get('/abierto/{id}[/]', \pedidoApi::class . ':traePedidoAbiertoApi');
-  $this->get('/cliente/{id}[/]', \pedidoApi::class . ':readAllClienteApi');
-  */
+  $this->get('/cliente/{id}[/]', \pedidoApi::class . ':readAllClienteApi');*/
 });
 
 $app->group('/pedidos_item', function () {

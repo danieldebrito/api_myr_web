@@ -2,6 +2,7 @@
 class pedido
 {
 	public $id_pedido;
+	public $id_cliente;
 	public $id_sucursal;
 	public $id_expreso;
 	public $estado;
@@ -46,12 +47,13 @@ class pedido
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta(
 				"INSERT INTO `pedidos`
-				(`id_sucursal`, `id_expreso`, `estado`, `fecha`, `observaciones`)
+				(`id_cliente`,`id_sucursal`, `id_expreso`, `estado`, `fecha`, `observaciones`)
 				VALUES
-				(:id_sucursal, :id_expreso, :estado, :fecha, :observaciones)"
+				(:id_cliente, :id_sucursal, :id_expreso, :estado, :fecha, :observaciones)"
 			);
 
 			// $consulta->bindValue(':id_pedido', $this->id_pedido, PDO::PARAM_INT); AI
+			$consulta->bindValue(':id_cliente', $this->id_cliente, PDO::PARAM_STR);
 			$consulta->bindValue(':id_sucursal', $this->id_sucursal, PDO::PARAM_STR);
 			$consulta->bindValue(':id_expreso', $this->id_expreso, PDO::PARAM_STR);
 			$consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
@@ -72,6 +74,7 @@ class pedido
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta(
 				"UPDATE `pedidos` SET 
+				`id_cliente` = :id_cliente,
                 `id_sucursal` = :id_sucursal,
 				`id_expreso` = :id_expreso, 
 				`estado` = :estado, 
@@ -80,6 +83,7 @@ class pedido
 				WHERE `id_pedido` = :id_pedido");
                 
 			$consulta->bindValue(':id_pedido', $this->id_pedido, PDO::PARAM_INT);
+			$consulta->bindValue(':id_cliente', $this->id_cliente, PDO::PARAM_STR);
 			$consulta->bindValue(':id_sucursal', $this->id_sucursal, PDO::PARAM_STR);
 			$consulta->bindValue(':id_expreso', $this->id_expreso, PDO::PARAM_STR);
 			$consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
