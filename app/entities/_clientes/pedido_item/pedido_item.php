@@ -103,13 +103,11 @@ class pedido_item
         }
 	}
 
-	/*
-
 	public static function readAllCliente ($id) {
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT p.id_pedido_item, p.id_cliente, p.id_pedido, p.id_articulo, p.cantidad, p.estado, a.descripcion_corta, a.stock, a.precio_lista
+				"SELECT p.id_pedido_item, p.id_cliente, p.id_articulo, p.cantidad, a.descripcion_corta, a.stock, a.precio_lista
 				FROM articulos a, pedidos_item p
 				WHERE a.id_articulo = p.id_articulo 
 				AND p.id_cliente = $id"
@@ -124,7 +122,11 @@ class pedido_item
 			return $ret;
 		}		
 	}
-
+/**
+ * id_pedido -1 significa que no pertenece a ningun pedido
+ * es decir, falta cerrar el pedido y se reemplaza con el numero de pedido
+ * generado una vez que el cliente cierra el pedido
+ */
 	public static function readAllClienteAbierto ($id) {
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
@@ -133,7 +135,7 @@ class pedido_item
 				FROM articulos a, pedidos_item p
 				WHERE a.id_articulo = p.id_articulo 
 				AND p.id_cliente = $id 
-				AND p.estado = 'abierto'"
+				AND p.id_pedido = -1"
 			);
 			$consulta->execute();
 					
@@ -150,11 +152,11 @@ class pedido_item
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta(
 			"UPDATE `pedidos_item` 
-			SET `id_pedido`= $id_pedido, `estado`= 'en_curso' 
+			SET `id_pedido`= $id_pedido 
 			WHERE `id_cliente` = '$id_cliente'
-			AND `estado` = 'abierto'");
+			AND `id_pedido` = -1");
 
         return $consulta->execute();
-	}*/
+	}
 }
 

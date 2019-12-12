@@ -132,10 +132,10 @@ $app->group('/pedidos_item', function () {
   $this->post('/', \pedido_itemApi::class . ':createApi');
   $this->delete('/{id}[/]', \pedido_itemApi::class . ':deleteApi');
   $this->post('/update', \pedido_itemApi::class . ':updateApi');
-/*
+
   $this->get('/cliente/{id}[/]', \pedido_itemApi::class . ':readAllClienteApi');
   $this->get('/clienteAbierto/{id}[/]', \pedido_itemApi::class . ':readAllClienteAbiertoApi');
-  $this->post('/updateItems[/]', \pedido_itemApi::class . ':updateItemsApi');*/
+  $this->post('/updateItems[/]', \pedido_itemApi::class . ':updateItemsApi');
 });
 
 $app->group('/productos', function () {
