@@ -45,9 +45,9 @@ class pedido_item
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta(
 				"INSERT INTO `pedidos_item`
-				(`id_pedido`, `id_articulo`, `cantidad`)
+				(`id_pedido`,`id_cliente`, `id_articulo`, `cantidad`)
 				VALUES
-				(:id_pedido, :id_articulo, :cantidad)"
+				(:id_pedido, :id_cliente, :id_articulo, :cantidad)"
 			);
 			// $consulta->bindValue(':id_pedido_item', $this->id_pedido_item, PDO::PARAM_INT); ai
 			$consulta->bindValue(':id_pedido', $this->id_pedido, PDO::PARAM_INT);
@@ -131,7 +131,7 @@ class pedido_item
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT p.id_pedido_item, p.id_cliente, p.id_pedido, p.id_articulo, p.cantidad, p.estado, a.descripcion_corta, a.stock, a.precio_lista
+				"SELECT p.id_pedido_item, p.id_cliente, p.id_pedido, p.id_articulo, p.cantidad, a.descripcion_corta, a.stock, a.precio_lista
 				FROM articulos a, pedidos_item p
 				WHERE a.id_articulo = p.id_articulo 
 				AND p.id_cliente = $id 
