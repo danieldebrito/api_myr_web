@@ -24,7 +24,8 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
 
 		$entity = new pedido_item();
 		//$entity->id_pedido_item = $ArrayDeParametros['id_pedido_item'];
-	  	$entity->id_pedido = $ArrayDeParametros['id_pedido'];
+		$entity->id_pedido = $ArrayDeParametros['id_pedido'];
+     	$entity->id_cliente = $ArrayDeParametros['id_cliente'];
 		$entity->id_articulo = $ArrayDeParametros['id_articulo'];
 		$entity->cantidad = $ArrayDeParametros['cantidad'];
 		  
@@ -38,7 +39,8 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
 		
 		$entity = new pedido_item();
 		$entity->id_pedido_item = $ArrayDeParametros['id_pedido_item'];
-	  	$entity->id_pedido = $ArrayDeParametros['id_pedido'];
+		$entity->id_pedido = $ArrayDeParametros['id_pedido'];
+		$entity->id_cliente = $ArrayDeParametros['id_cliente'];
 		$entity->id_articulo = $ArrayDeParametros['id_articulo'];
 		$entity->cantidad = $ArrayDeParametros['cantidad'];
 
