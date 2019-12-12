@@ -24,9 +24,9 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
 
 		$entity = new pedido_item();
 		//$entity->id_pedido_item = $ArrayDeParametros['id_pedido_item'];
-		$entity->id_pedido = $ArrayDeParametros['id_pedido'];
-     	$entity->id_cliente = $ArrayDeParametros['id_cliente'];
-		$entity->id_articulo = $ArrayDeParametros['id_articulo'];
+		$entity->idPedido = $ArrayDeParametros['idPedido'];
+     	$entity->idCliente = $ArrayDeParametros['idCliente'];
+		$entity->idArticulo = $ArrayDeParametros['idArticulo'];
 		$entity->cantidad = $ArrayDeParametros['cantidad'];
 		  
 		$response = $entity->create();
@@ -38,10 +38,10 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
 		$ArrayDeParametros = $request->getParsedBody();
 		
 		$entity = new pedido_item();
-		$entity->id_pedido_item = $ArrayDeParametros['id_pedido_item'];
-		$entity->id_pedido = $ArrayDeParametros['id_pedido'];
-		$entity->id_cliente = $ArrayDeParametros['id_cliente'];
-		$entity->id_articulo = $ArrayDeParametros['id_articulo'];
+		$entity->idPedidoItem = $ArrayDeParametros['idPedidoItem'];
+		$entity->idPedido = $ArrayDeParametros['idPedido'];
+		$entity->idCliente = $ArrayDeParametros['idCliente'];
+		$entity->idArticulo = $ArrayDeParametros['idArticulo'];
 		$entity->cantidad = $ArrayDeParametros['cantidad'];
 
 		$resultado = $entity->update();
@@ -79,8 +79,8 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
 		
 		$ArrayDeParametros = $request->getParsedBody();
 
-		$id_pedido=$ArrayDeParametros['id_pedido'];
-		$id_cliente=$ArrayDeParametros['id_cliente'];
+		$id_pedido=$ArrayDeParametros['idPedido'];
+		$id_cliente=$ArrayDeParametros['idCliente'];
 
 		$all=pedido_item::updateItems($id_pedido, $id_cliente);
 		$newResponse = $response->withJson($all, 200);
