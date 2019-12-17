@@ -24,8 +24,9 @@ class cliente_sucursalApi extends cliente_sucursal implements IApiCRUD {
 
 	  	$entity = new cliente_sucursal();
 	  	// $entity->id_sucursal = $ArrayDeParametros['id_sucursal'];  AI
-	  	$entity->id_cliente = $ArrayDeParametros['id_cliente'];
-		$entity->nombre_sucursal = $ArrayDeParametros['nombre_sucursal'];
+	  	$entity->idCliente = $ArrayDeParametros['idCliente'];
+		$entity->idClienteExpreso = $ArrayDeParametros['idClienteExpreso'];
+		$entity->nombreSucursal = $ArrayDeParametros['nombreSucursal'];
 		$entity->calle = $ArrayDeParametros['calle'];
 		$entity->numero = $ArrayDeParametros['numero'];
 		$entity->cp = $ArrayDeParametros['cp'];
@@ -43,9 +44,10 @@ class cliente_sucursalApi extends cliente_sucursal implements IApiCRUD {
 		
 		$entity = new cliente_sucursal();
 		
-		$entity->id_sucursal = $ArrayDeParametros['id_sucursal'];
-		$entity->id_cliente = $ArrayDeParametros['id_cliente'];
-	  	$entity->nombre_sucursal = $ArrayDeParametros['nombre_sucursal'];
+		$entity->idSucursal = $ArrayDeParametros['idSucursal'];
+		$entity->idCliente = $ArrayDeParametros['idCliente'];
+		$entity->idClienteExpreso = $ArrayDeParametros['idClienteExpreso'];
+		$entity->nombreSucursal = $ArrayDeParametros['nombreSucursal'];
 	  	$entity->calle = $ArrayDeParametros['calle'];
 	  	$entity->numero = $ArrayDeParametros['numero'];
 	  	$entity->cp = $ArrayDeParametros['cp'];

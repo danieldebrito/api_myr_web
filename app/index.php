@@ -25,6 +25,7 @@ require './entities/_clientes/cliente_sucursal/cliente_sucursalApi.php';
 require './entities/_clientes/expreso/expresoApi.php';
 require './entities/_clientes/pedido/pedidoApi.php';
 require './entities/_clientes/pedido_item/pedido_itemApi.php';
+require './entities/_clientes/cliente_expreso/cliente_expresoApi.php';
 //-----------------------------------------------------------------------//
 require './entities/usuario/userApi.php';
 //-----------------------------------------------------------------------//
@@ -168,6 +169,14 @@ $app->group('/combustibles', function () {
   $this->post('/', \combustibleApi::class . ':createApi');
   $this->delete('/{id}[/]', \combustibleApi::class . ':deleteApi');
   $this->post('/update', \combustibleApi::class . ':updateApi');
+});
+
+$app->group('/cliente_expreso', function () {
+  $this->get('/', \cliente_expresoApi::class . ':readAllApi');
+  $this->get('/{id}', \cliente_expresoApi::class . ':readApi');
+  $this->post('/', \cliente_expresoApi::class . ':createApi');
+  $this->delete('/{id}[/]', \cliente_expresoApi::class . ':deleteApi');
+  $this->post('/update', \cliente_expresoApi::class . ':updateApi');
 });
 
 $app->add(function ($req, $res, $next) {

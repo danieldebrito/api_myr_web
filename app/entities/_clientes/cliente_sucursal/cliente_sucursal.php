@@ -1,8 +1,9 @@
 <?php
 class cliente_sucursal{
-	public $id_sucursal;
-	public $id_cliente;
-	public $nombre_sucursal;
+	public $idSucursal;
+	public $idCliente;
+	public $idClienteExpreso;
+	public $nombreSucursal;
 	public $calle;
 	public $numero;
 	public $cp;
@@ -30,7 +31,7 @@ class cliente_sucursal{
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `cliente_sucursales` WHERE id_sucursal = $id"
+				"SELECT * FROM `cliente_sucursales` WHERE idClienteSucursal = $id"
 			);
 			$consulta->execute();
 			$ret = $consulta->fetchObject("cliente_sucursal");
@@ -47,16 +48,18 @@ class cliente_sucursal{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta(
 				"INSERT INTO `cliente_sucursales`
-				( `id_cliente`,
-				 `nombre_sucursal`,
+				( `idCliente`,
+				 `idClienteExpreso`,
+				 `nombreSucursal`,
 				 `calle`,
 				 `numero`,
 				 `cp`,
 				 `localidad`,
 				 `provincia`)
 				VALUES
-				(:id_cliente, 
-				 :nombre_sucursal, 
+				(:idCliente,
+				 :idClienteExpreso, 
+				 :nombreSucursal, 
 				 :calle, 
 				 :numero, 
 				 :cp,
@@ -65,8 +68,9 @@ class cliente_sucursal{
 			);
 
 			// $consulta->bindValue(':id_sucursal', $this->id_sucursal, PDO::PARAM_STR);
-			$consulta->bindValue(':id_cliente', $this->id_cliente, PDO::PARAM_STR);
-			$consulta->bindValue(':nombre_sucursal', $this->nombre_sucursal, PDO::PARAM_STR);
+			$consulta->bindValue(':idCliente', $this->idCliente, PDO::PARAM_STR);
+			$consulta->bindValue(':idClienteExpreso', $this->idClienteExpreso, PDO::PARAM_STR);
+			$consulta->bindValue(':nombreSucursal', $this->nombreSucursal, PDO::PARAM_STR);
 			$consulta->bindValue(':calle', $this->calle, PDO::PARAM_STR);
 			$consulta->bindValue(':numero', $this->numero, PDO::PARAM_STR);
 			$consulta->bindValue(':cp', $this->cp, PDO::PARAM_STR);
@@ -88,18 +92,20 @@ class cliente_sucursal{
 	
         $consulta = $objetoAccesoDato->RetornarConsulta(
 				"UPDATE `cliente_sucursales` SET 
-				`id_cliente` = :id_cliente, 
-				`nombre_sucursal` = :nombre_sucursal, 
+				`idCliente` = :idCliente,
+				`idClienteExpreso` = :idClienteExpreso,  
+				`nombreSucursal` = :nombreSucursal, 
 				`calle` = :calle, 
 				`numero` = :numero, 
 				`cp` = :cp, 
 				`localidad` = :localidad, 
 				`provincia` = :provincia 
-				WHERE `id_sucursal` = :id_sucursal");
+				WHERE `idSucursal` = :idSucursal");
                 
-				$consulta->bindValue(':id_sucursal', $this->id_sucursal, PDO::PARAM_INT);
-				$consulta->bindValue(':id_cliente', $this->id_cliente, PDO::PARAM_STR);
-				$consulta->bindValue(':nombre_sucursal', $this->nombre_sucursal, PDO::PARAM_STR);
+				$consulta->bindValue(':idSucursal', $this->idSucursal, PDO::PARAM_INT);
+				$consulta->bindValue(':idCliente', $this->idCliente, PDO::PARAM_STR);
+				$consulta->bindValue(':idClienteExpreso', $this->idClienteExpreso, PDO::PARAM_STR);
+				$consulta->bindValue(':nombreSucursal', $this->nombreSucursal, PDO::PARAM_STR);
 				$consulta->bindValue(':calle', $this->calle, PDO::PARAM_STR);
 				$consulta->bindValue(':numero', $this->numero, PDO::PARAM_STR);
 				$consulta->bindValue(':cp', $this->cp, PDO::PARAM_STR);
@@ -114,9 +120,9 @@ class cliente_sucursal{
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta(
 				"DELETE FROM `cliente_sucursales` 
-				WHERE `id_sucursal` = $id"
+				WHERE `idSucursal` = $id"
 				);
-            $consulta->bindValue(':id_sucursal', $id, PDO::PARAM_STR);
+            $consulta->bindValue(':idSucursal', $id, PDO::PARAM_STR);
             $consulta->execute();
             $respuesta = array("Estado" => true, "Mensaje" => "Eliminado Correctamente");
 
@@ -133,7 +139,7 @@ class cliente_sucursal{
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `cliente_sucursales` WHERE `id_cliente` = $id"
+				"SELECT * FROM `cliente_sucursales` WHERE `idCliente` = $id"
 			);
 			$consulta->execute();
 					
