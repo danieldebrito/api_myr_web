@@ -26,7 +26,7 @@ class cliente_expreso
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `cliente_expresos` WHERE idCliente = $id"
+				"SELECT * FROM `cliente_expresos` WHERE idClienteExpreso = $id"
 			);
 			$consulta->execute();
 			$ret = $consulta->fetchObject("cliente_expreso");
