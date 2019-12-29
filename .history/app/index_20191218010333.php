@@ -114,10 +114,6 @@ $app->group('/expresos', function () {
   $this->post('/', \expresoApi::class . ':createApi');
   $this->delete('/{id}[/]', \expresoApi::class . ':deleteApi');
   $this->post('/update', \expresoApi::class . ':updateApi');
-
-  $this->get('/byName/{name}', \expresoApi::class . ':readByNameApi');
-
-
 });
 
 $app->group('/pedidos', function () {

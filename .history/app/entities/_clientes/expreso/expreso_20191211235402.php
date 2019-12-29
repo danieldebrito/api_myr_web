@@ -95,21 +95,5 @@ class expreso
             return $respuesta;
         }
 	}
-
-	public static function readByName($name) {
-		try {
-			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `expresos` WHERE `nombre` =  $name"
-			);
-			$consulta->execute();
-			$ret = $consulta->fetchObject("expreso");
-        } catch (Exception $e) {
-            $mensaje = $e->getMessage();
-            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
-        } finally {
-            return $ret;
-        }
-	}
 }
 

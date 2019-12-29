@@ -59,7 +59,7 @@ class expresoApi extends expreso implements IApiCRUD {
 	
 	public function readByNameApi($request, $response, $args) {
 		$name=$args['name'];
-		$item=expreso::readByName($name);
+		$item=expreso::read($name);
 		$newResponse = $response->withJson($item, 200);  
 		
 		return $newResponse;

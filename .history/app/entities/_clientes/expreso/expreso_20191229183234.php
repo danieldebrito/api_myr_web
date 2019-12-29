@@ -100,7 +100,7 @@ class expreso
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `expresos` WHERE `nombre` =  $name"
+				"SELECT * FROM `expresos` WHERE nombre = $name"
 			);
 			$consulta->execute();
 			$ret = $consulta->fetchObject("expreso");
