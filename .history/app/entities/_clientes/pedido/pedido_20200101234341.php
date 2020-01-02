@@ -117,7 +117,7 @@ class pedido
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `pedidos` WHERE `idCliente`  = $id"
+				"SELECT * FROM `pedidos` WHERE `id_cliente` = $id"
 			);
 			$consulta->execute();
 					

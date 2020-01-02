@@ -151,21 +151,5 @@ class cliente_sucursal{
 			return $ret;
 		}		
 	}
-
-	public static function readByName($name) {
-		try {
-			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `cliente_sucursales` WHERE `nombreSucursal` =  $name"
-			);
-			$consulta->execute();
-			$ret = $consulta->fetchObject("cliente_sucursal");
-        } catch (Exception $e) {
-            $mensaje = $e->getMessage();
-            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
-        } finally {
-            return $ret;
-        }
-	}
 }
 

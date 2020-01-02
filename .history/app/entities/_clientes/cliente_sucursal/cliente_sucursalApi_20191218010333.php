@@ -77,14 +77,6 @@ class cliente_sucursalApi extends cliente_sucursal implements IApiCRUD {
 		  
 		return $response;
 	}
-
-	public function readByNameApi($request, $response, $args) {
-		$name=$args['name'];
-		$item=cliente_sucursal::readByName($name);
-		$newResponse = $response->withJson($item, 200);  
-		
-		return $newResponse;
-	}
 }
 ?>
 

@@ -112,23 +112,6 @@ class pedido
             return $respuesta;
         }
 	}
-
-	public static function readAllCliente ($id) {
-		try {
-			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `pedidos` WHERE `idCliente`  = $id"
-			);
-			$consulta->execute();
-					
-			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS, "pedido");
-		} catch (Exception $e) {
-			$mensaje = $e->getMessage();
-			$respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
-		} finally {
-			return $ret;
-		}		
-	}
 }
 
 
@@ -151,5 +134,20 @@ class pedido
         }
 	}
 
-*/
+	public static function readAllCliente ($id) {
+		try {
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta = $objetoAccesoDato->RetornarConsulta(
+				"SELECT * FROM `pedidos` WHERE `id_cliente` = $id"
+			);
+			$consulta->execute();
+					
+			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS, "pedido");
+		} catch (Exception $e) {
+			$mensaje = $e->getMessage();
+			$respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+		} finally {
+			return $ret;
+		}		
+	}*/
 
