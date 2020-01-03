@@ -1,13 +1,10 @@
 <?php
 class cliente
 {
-	public $idCliente;
+	public $id;
 	public $cuit;
 	public $razonSocial;
-	public $condFiscal; // enum
-	public $retIIBBcoef;
-	public $idDescuento;
-	public $userNombre;
+	public $comprador;
 	public $email;
 	public $clave;
 	public $estado;
@@ -33,7 +30,7 @@ class cliente
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `clientes` WHERE idCliente = $id"
+				"SELECT * FROM `clientes` WHERE id = $id"
 			);
 			$consulta->execute();
 			$ret = $consulta->fetchObject("cliente");
@@ -50,35 +47,14 @@ class cliente
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta(
 				"INSERT INTO `clientes`
-				(`idCliente`, 
-				`cuit`, 
-				`razonSocial`,
-				`condFiscal`,
-				`retIIBBcoef`,
-				`idDescuento`,
-				`userNombre`,
-				`email`, 
-				`clave`, 
-				`estado`)
+				(`id`, `cuit`, `razonSocial`, `comprador`, `email`, `clave`, `estado`)
 				VALUES
-				(:idCliente, 
-				:cuit, 
-				:razonSocial, 
-				:condFiscal, 
-				:retIIBBcoef, 
-				:idDescuento, 
-				:userNombre, 
-				:email, 
-				:clave, 
-				:estado)"
+				(:id,:cuit, :razonSocial, :comprador, :email, :clave, :estado)"
 			);
-			$consulta->bindValue(':idCliente', $this->idCliente, PDO::PARAM_STR);
+			$consulta->bindValue(':id', $this->id, PDO::PARAM_STR);
 			$consulta->bindValue(':cuit', $this->cuit, PDO::PARAM_STR);
 			$consulta->bindValue(':razonSocial', $this->razonSocial, PDO::PARAM_STR);
-			$consulta->bindValue(':condFiscal', $this->condFiscal, PDO::PARAM_STR);
-			$consulta->bindValue(':retIIBBcoef', $this->retIIBBcoef, PDO::PARAM_STR);
-			$consulta->bindValue(':idDescuento', $this->idDescuento, PDO::PARAM_STR);
-			$consulta->bindValue(':userNombre', $this->userNombre, PDO::PARAM_STR);
+			$consulta->bindValue(':comprador', $this->comprador, PDO::PARAM_STR);
 			$consulta->bindValue(':email', $this->email, PDO::PARAM_STR);
 			$consulta->bindValue(':clave', $this->clave, PDO::PARAM_STR);
 			$consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
@@ -99,25 +75,19 @@ class cliente
 				"UPDATE `clientes` SET 
 				`cuit` = :cuit, 
                 `razonSocial` = :razonSocial, 
-				`condFiscal` = :condFiscal, 
-				`retIIBBcoef` = :retIIBBcoef, 
-				`idDescuento` = :idDescuento, 
-				`userNombre` = :userNombre, 
+                `comprador` = :comprador, 
                 `email` = :email,
 				`clave` = :clave,
 				`estado` = :estado
-				WHERE `idCliente` = :idCliente");
+				WHERE `id` = :id");
                 
-	$consulta->bindValue(':idCliente', $this->idCliente, PDO::PARAM_STR);
-	$consulta->bindValue(':cuit', $this->cuit, PDO::PARAM_STR);
-	$consulta->bindValue(':razonSocial', $this->razonSocial, PDO::PARAM_STR);
-	$consulta->bindValue(':condFiscal', $this->condFiscal, PDO::PARAM_STR);
-	$consulta->bindValue(':retIIBBcoef', $this->retIIBBcoef, PDO::PARAM_STR);
-	$consulta->bindValue(':idDescuento', $this->idDescuento, PDO::PARAM_STR);
-	$consulta->bindValue(':userNombre', $this->userNombre, PDO::PARAM_STR);
-	$consulta->bindValue(':email', $this->email, PDO::PARAM_STR);
-	$consulta->bindValue(':clave', $this->clave, PDO::PARAM_STR);
-	$consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
+				$consulta->bindValue(':id', $this->id, PDO::PARAM_STR);
+				$consulta->bindValue(':cuit', $this->cuit, PDO::PARAM_STR);
+				$consulta->bindValue(':razonSocial', $this->razonSocial, PDO::PARAM_STR);
+				$consulta->bindValue(':comprador', $this->comprador, PDO::PARAM_STR);
+				$consulta->bindValue(':email', $this->email, PDO::PARAM_STR);
+				$consulta->bindValue(':clave', $this->clave, PDO::PARAM_STR);
+				$consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
         
         return $consulta->execute();
     }
@@ -127,9 +97,9 @@ class cliente
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta(
 				"DELETE FROM `clientes` 
-				WHERE `idCliente` = $id"
+				WHERE `id` = $id"
 				);
-            $consulta->bindValue(':idCliente', $id, PDO::PARAM_STR);
+            $consulta->bindValue(':id', $id, PDO::PARAM_STR);
             $consulta->execute();
             $respuesta = array("Estado" => true, "Mensaje" => "Eliminado Correctamente");
 
@@ -146,7 +116,7 @@ class cliente
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 
         $consulta = $objetoAccesoDato->RetornarConsulta(
-			"SELECT * FROM `clientes` WHERE `idCliente`= '".$id."' AND `clave`= '".$clave."'"
+			"SELECT * FROM `clientes` WHERE `id`= '".$id."' AND `clave`= '".$clave."'"
 		);
 
 		$consulta->execute();
@@ -154,5 +124,4 @@ class cliente
         return $resultado;
     }
 }
-
 

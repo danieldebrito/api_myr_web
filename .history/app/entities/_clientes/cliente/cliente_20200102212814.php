@@ -127,9 +127,9 @@ class cliente
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta(
 				"DELETE FROM `clientes` 
-				WHERE `idCliente` = $id"
+				WHERE `id` = $id"
 				);
-            $consulta->bindValue(':idCliente', $id, PDO::PARAM_STR);
+            $consulta->bindValue(':id', $id, PDO::PARAM_STR);
             $consulta->execute();
             $respuesta = array("Estado" => true, "Mensaje" => "Eliminado Correctamente");
 
@@ -146,7 +146,7 @@ class cliente
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 
         $consulta = $objetoAccesoDato->RetornarConsulta(
-			"SELECT * FROM `clientes` WHERE `idCliente`= '".$id."' AND `clave`= '".$clave."'"
+			"SELECT * FROM `clientes` WHERE `id`= '".$id."' AND `clave`= '".$clave."'"
 		);
 
 		$consulta->execute();
@@ -154,5 +154,4 @@ class cliente
         return $resultado;
     }
 }
-
 
