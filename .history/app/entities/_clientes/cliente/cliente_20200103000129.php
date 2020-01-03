@@ -142,11 +142,11 @@ class cliente
         }
     }
 
-	public function Login($idCliente, $clave) {
+	public function Login($id, $clave) {
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 
         $consulta = $objetoAccesoDato->RetornarConsulta(
-			"SELECT * FROM `clientes` WHERE `idCliente`= '".$idCliente."' AND `clave`= '".$clave."'"
+			"SELECT * FROM `clientes` WHERE `idCliente`= '".$id."' AND `clave`= '".$clave."'"
 		);
 
 		$consulta->execute();

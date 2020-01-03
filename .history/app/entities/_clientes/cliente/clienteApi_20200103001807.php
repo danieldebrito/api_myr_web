@@ -75,10 +75,10 @@ class clienteApi extends cliente implements IApiCRUD {
         $json = $request->getBody();
 		$data = json_decode($json, true);
 
-		$retorno = cliente::Login($data["idCliente"], $data["clave"]);
+		$retorno = cliente::Login($data["id"], $data["clave"]);
 
-        if ($retorno["idCliente"] != "") {
-            $respuesta = array("Estado" => "OK", "Mensaje" => "Logueado Exitosamente", "idCliente" => $retorno["idCliente"]);
+        if ($retorno["id"] != "") {
+            $respuesta = array("Estado" => "OK", "Mensaje" => "Logueado Exitosamente", "id" => $retorno["id"]);
         } else {
             $respuesta = array("Estado" => "ERROR", "Mensaje" => "Usuario o Clave Invalidos");
         }

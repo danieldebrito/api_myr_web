@@ -146,7 +146,7 @@ class cliente
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 
         $consulta = $objetoAccesoDato->RetornarConsulta(
-			"SELECT * FROM `clientes` WHERE `idCliente`= '".$idCliente."' AND `clave`= '".$clave."'"
+			"SELECT * FROM `clientes` WHERE `idCliente`= '".$id."' AND `clave`= '".$clave."'"
 		);
 
 		$consulta->execute();
