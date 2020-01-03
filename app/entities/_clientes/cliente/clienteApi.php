@@ -23,13 +23,10 @@ class clienteApi extends cliente implements IApiCRUD {
 		$ArrayDeParametros = $request->getParsedBody();
 
 	  	$entity = new cliente();
-	  	$entity->idCliente = $ArrayDeParametros['idCliente'];
+	  	$entity->id = $ArrayDeParametros['id'];
 	  	$entity->cuit = $ArrayDeParametros['cuit'];
 		$entity->razonSocial = $ArrayDeParametros['razonSocial'];
-		$entity->condFiscal = $ArrayDeParametros['condFiscal'];
-		$entity->retIIBBcoef = $ArrayDeParametros['retIIBBcoef'];
-		$entity->idDescuento = $ArrayDeParametros['idDescuento'];
-		$entity->userNombre = $ArrayDeParametros['userNombre'];
+		$entity->comprador = $ArrayDeParametros['comprador'];
 		$entity->email = $ArrayDeParametros['email'];
 		$entity->clave = $ArrayDeParametros['clave'];
 		$entity->estado = $ArrayDeParametros['estado'];
@@ -44,13 +41,11 @@ class clienteApi extends cliente implements IApiCRUD {
 		$ArrayDeParametros = $request->getParsedBody();
 		
 		$entity = new cliente();
-		$entity->idCliente = $ArrayDeParametros['idCliente'];
+		
+		$entity->id = $ArrayDeParametros['id'];
 		$entity->cuit = $ArrayDeParametros['cuit'];
 	  	$entity->razonSocial = $ArrayDeParametros['razonSocial'];
-	  	$entity->condFiscal = $ArrayDeParametros['condFiscal'];
-	  	$entity->retIIBBcoef = $ArrayDeParametros['retIIBBcoef'];
-	  	$entity->idDescuento = $ArrayDeParametros['idDescuento'];
-	  	$entity->userNombre = $ArrayDeParametros['userNombre'];
+	  	$entity->comprador = $ArrayDeParametros['comprador'];
 	  	$entity->email = $ArrayDeParametros['email'];
 	  	$entity->clave = $ArrayDeParametros['clave'];
 	  	$entity->estado = $ArrayDeParametros['estado'];
@@ -75,10 +70,10 @@ class clienteApi extends cliente implements IApiCRUD {
         $json = $request->getBody();
 		$data = json_decode($json, true);
 
-		$retorno = cliente::Login($data["idCliente"], $data["clave"]);
+		$retorno = cliente::Login($data["id"], $data["clave"]);
 
-        if ($retorno["idCliente"] != "") {
-            $respuesta = array("Estado" => "OK", "Mensaje" => "Logueado Exitosamente", "idCliente" => $retorno["idCliente"]);
+        if ($retorno["id"] != "") {
+            $respuesta = array("Estado" => "OK", "Mensaje" => "Logueado Exitosamente", "id" => $retorno["id"]);
         } else {
             $respuesta = array("Estado" => "ERROR", "Mensaje" => "Usuario o Clave Invalidos");
         }
