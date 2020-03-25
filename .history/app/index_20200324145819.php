@@ -106,6 +106,8 @@ $app->group('/cliente_sucursales', function () {
   $this->post('/update', \cliente_sucursalApi::class . ':updateApi');
 
   $this->get('/sucursales/{id}', \cliente_sucursalApi::class . ':readAllClienteApi');
+  $this->get('/byName/{name}', \cliente_sucursalApi::class . ':readByNameApi');
+
 });
 
 $app->group('/expresos', function () {
@@ -126,9 +128,10 @@ $app->group('/pedidos', function () {
   $this->post('/', \pedidoApi::class . ':createApi');
   $this->delete('/{id}[/]', \pedidoApi::class . ':deleteApi');
   $this->post('/update', \pedidoApi::class . ':updateApi');
+  $this->get('/cliente/{id}[/]', \pedidoApi::class . ':readAllClienteApi');
 /*
   $this->get('/abierto/{id}[/]', \pedidoApi::class . ':traePedidoAbiertoApi');
-  $this->get('/cliente/{id}[/]', \pedidoApi::class . ':readAllClienteApi');*/
+  */
 });
 
 $app->group('/pedidos_item', function () {
@@ -188,7 +191,7 @@ $app->add(function ($req, $res, $next) {
   return $response
   ->withHeader('Access-Control-Allow-Origin', 'http://localhost:4200')
   ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-  ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 });
 
 $app->run();
