@@ -25,7 +25,7 @@ class cliente_sucursalApi extends cliente_sucursal implements IApiCRUD {
 	  	$entity = new cliente_sucursal();
 	  	// $entity->id_sucursal = $ArrayDeParametros['id_sucursal'];  AI
 	  	$entity->idCliente = $ArrayDeParametros['idCliente'];
-		$entity->idClienteExpreso = $ArrayDeParametros['idClienteExpreso'];
+		$entity->idExpreso = $ArrayDeParametros['idExpreso'];
 		$entity->nombreSucursal = $ArrayDeParametros['nombreSucursal'];
 		$entity->calle = $ArrayDeParametros['calle'];
 		$entity->numero = $ArrayDeParametros['numero'];
@@ -46,7 +46,7 @@ class cliente_sucursalApi extends cliente_sucursal implements IApiCRUD {
 		
 		$entity->idSucursal = $ArrayDeParametros['idSucursal'];
 		$entity->idCliente = $ArrayDeParametros['idCliente'];
-		$entity->idClienteExpreso = $ArrayDeParametros['idClienteExpreso'];
+		$entity->idExpreso = $ArrayDeParametros['idExpreso'];
 		$entity->nombreSucursal = $ArrayDeParametros['nombreSucursal'];
 	  	$entity->calle = $ArrayDeParametros['calle'];
 	  	$entity->numero = $ArrayDeParametros['numero'];

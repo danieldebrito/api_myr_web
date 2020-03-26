@@ -2,7 +2,7 @@
 class cliente_sucursal{
 	public $idSucursal;
 	public $idCliente;
-	public $idClienteExpreso;
+	public $idExpreso;
 	public $nombreSucursal;
 	public $calle;
 	public $numero;
@@ -49,7 +49,7 @@ class cliente_sucursal{
 			$consulta =$objetoAccesoDato->RetornarConsulta(
 				"INSERT INTO `cliente_sucursales`
 				( `idCliente`,
-				 `idClienteExpreso`,
+				 `idExpreso`,
 				 `nombreSucursal`,
 				 `calle`,
 				 `numero`,
@@ -58,7 +58,7 @@ class cliente_sucursal{
 				 `provincia`)
 				VALUES
 				(:idCliente,
-				 :idClienteExpreso, 
+				 :idExpreso, 
 				 :nombreSucursal, 
 				 :calle, 
 				 :numero, 
@@ -69,7 +69,7 @@ class cliente_sucursal{
 
 			// $consulta->bindValue(':id_sucursal', $this->id_sucursal, PDO::PARAM_STR);
 			$consulta->bindValue(':idCliente', $this->idCliente, PDO::PARAM_STR);
-			$consulta->bindValue(':idClienteExpreso', $this->idClienteExpreso, PDO::PARAM_STR);
+			$consulta->bindValue(':idExpreso', $this->idExpreso, PDO::PARAM_STR);
 			$consulta->bindValue(':nombreSucursal', $this->nombreSucursal, PDO::PARAM_STR);
 			$consulta->bindValue(':calle', $this->calle, PDO::PARAM_STR);
 			$consulta->bindValue(':numero', $this->numero, PDO::PARAM_STR);
@@ -93,7 +93,7 @@ class cliente_sucursal{
         $consulta = $objetoAccesoDato->RetornarConsulta(
 				"UPDATE `cliente_sucursales` SET 
 				`idCliente` = :idCliente,
-				`idClienteExpreso` = :idClienteExpreso,  
+				`idExpreso` = :idExpreso,  
 				`nombreSucursal` = :nombreSucursal, 
 				`calle` = :calle, 
 				`numero` = :numero, 
@@ -104,7 +104,7 @@ class cliente_sucursal{
                 
 				$consulta->bindValue(':idSucursal', $this->idSucursal, PDO::PARAM_INT);
 				$consulta->bindValue(':idCliente', $this->idCliente, PDO::PARAM_STR);
-				$consulta->bindValue(':idClienteExpreso', $this->idClienteExpreso, PDO::PARAM_STR);
+				$consulta->bindValue(':idExpreso', $this->idExpreso, PDO::PARAM_STR);
 				$consulta->bindValue(':nombreSucursal', $this->nombreSucursal, PDO::PARAM_STR);
 				$consulta->bindValue(':calle', $this->calle, PDO::PARAM_STR);
 				$consulta->bindValue(':numero', $this->numero, PDO::PARAM_STR);

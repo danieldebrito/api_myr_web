@@ -25,7 +25,7 @@ class cliente_sucursalApi extends cliente_sucursal implements IApiCRUD {
 	  	$entity = new cliente_sucursal();
 	  	// $entity->id_sucursal = $ArrayDeParametros['id_sucursal'];  AI
 	  	$entity->idCliente = $ArrayDeParametros['idCliente'];
-		$entity->idClienteExpreso = $ArrayDeParametros['idClienteExpreso'];
+		$entity->idExpreso = $ArrayDeParametros['idExpreso'];
 		$entity->nombreSucursal = $ArrayDeParametros['nombreSucursal'];
 		$entity->calle = $ArrayDeParametros['calle'];
 		$entity->numero = $ArrayDeParametros['numero'];
@@ -46,7 +46,7 @@ class cliente_sucursalApi extends cliente_sucursal implements IApiCRUD {
 		
 		$entity->idSucursal = $ArrayDeParametros['idSucursal'];
 		$entity->idCliente = $ArrayDeParametros['idCliente'];
-		$entity->idClienteExpreso = $ArrayDeParametros['idClienteExpreso'];
+		$entity->idExpreso = $ArrayDeParametros['idExpreso'];
 		$entity->nombreSucursal = $ArrayDeParametros['nombreSucursal'];
 	  	$entity->calle = $ArrayDeParametros['calle'];
 	  	$entity->numero = $ArrayDeParametros['numero'];
@@ -76,6 +76,14 @@ class cliente_sucursalApi extends cliente_sucursal implements IApiCRUD {
 	   	$response = $response->withJson($all, 200);  
 		  
 		return $response;
+	}
+
+	public function readByNameApi($request, $response, $args) {
+		$name=$args['name'];
+		$item=cliente_sucursal::readByName($name);
+		$newResponse = $response->withJson($item, 200);  
+		
+		return $newResponse;
 	}
 }
 ?>
