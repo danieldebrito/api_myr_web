@@ -123,9 +123,7 @@ class expreso
 				AND cliente_sucursales.idExpreso = expresos.id_expreso"
 			);
 			$consulta->execute();
-
-			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS, "expreso");
-			
+			$ret = $consulta->fetchObject("expreso");
         } catch (Exception $e) {
             $mensaje = $e->getMessage();
             $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");

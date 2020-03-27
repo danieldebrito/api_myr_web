@@ -14,7 +14,7 @@ class cliente_sucursal{
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `cliente_sucursales`"
+				"SELECT * FROM `clientes_sucursales`"
 			);
 			$consulta->execute();
 					
@@ -167,6 +167,5 @@ class cliente_sucursal{
             return $ret;
         }
 	}
-	
 }
 

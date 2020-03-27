@@ -111,5 +111,27 @@ class expreso
             return $ret;
         }
 	}
+
+	
+	public static function readByCliente($idCliente) {
+		try {
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta = $objetoAccesoDato->RetornarConsulta(
+				"SELECT cliente_sucursales.idExpreso AS id_expreso, expresos.nombre
+				FROM cliente_sucursales, expresos
+				WHERE cliente_sucursales.idCliente = $idCliente
+				AND cliente_sucursales.idExpreso = expresos.id_expreso"
+			);
+			$consulta->execute();
+
+			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS, "expreso");
+			
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+	}
 }
 

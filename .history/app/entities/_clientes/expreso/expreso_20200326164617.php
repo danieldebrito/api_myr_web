@@ -100,7 +100,27 @@ class expreso
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `expresos` WHERE nombre = $name"
+				"SELECT * FROM `expresos` WHERE `nombre` =  $name"
+			);
+			$consulta->execute();
+			$ret = $consulta->fetchObject("expreso");
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+	}
+
+	
+	public static function readByCliente($idCliente) {
+		try {
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta = $objetoAccesoDato->RetornarConsulta(
+				"SELECT * 
+				FROM cliente_sucursales, expresos
+				WHERE cliente_sucursales.idCliente = $idCliente
+				AND cliente_sucursales.idExpreso = expresos.id_expreso"
 			);
 			$consulta->execute();
 			$ret = $consulta->fetchObject("expreso");

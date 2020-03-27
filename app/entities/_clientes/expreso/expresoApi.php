@@ -64,6 +64,14 @@ class expresoApi extends expreso implements IApiCRUD {
 		
 		return $newResponse;
 	}
+
+	public function readByClienteApi($request, $response, $args) {
+		$idCliente=$args['idCliente'];
+		$item=expreso::readByCliente($idCliente);
+		$newResponse = $response->withJson($item, 200);  
+		
+		return $newResponse;
+	}
 }
 ?>
 

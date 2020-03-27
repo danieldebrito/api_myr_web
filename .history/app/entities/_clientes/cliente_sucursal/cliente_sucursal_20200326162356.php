@@ -167,6 +167,24 @@ class cliente_sucursal{
             return $ret;
         }
 	}
-	
+
+	public static function expresosByCliente($idCliente) {
+		try {
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta = $objetoAccesoDato->RetornarConsulta(
+				"SELECT cliente_sucursales.idExpreso, expresos.nombre
+				FROM cliente_sucursales, expresos
+				WHERE cliente_sucursales.idCliente = $idCliente
+				AND cliente_sucursales.idExpreso = expresos.id_expreso"
+			);
+			$consulta->execute();
+			$ret = $consulta->fetchObject("expreso");
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+	}
 }
 

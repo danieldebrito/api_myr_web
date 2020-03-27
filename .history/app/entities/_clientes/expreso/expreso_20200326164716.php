@@ -117,15 +117,13 @@ class expreso
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT cliente_sucursales.idExpreso AS id_expreso, expresos.nombre
+				"SELECT cliente_sucursales.idExpreso, expresos.nombre
 				FROM cliente_sucursales, expresos
 				WHERE cliente_sucursales.idCliente = $idCliente
 				AND cliente_sucursales.idExpreso = expresos.id_expreso"
 			);
 			$consulta->execute();
-
-			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS, "expreso");
-			
+			$ret = $consulta->fetchObject("expreso");
         } catch (Exception $e) {
             $mensaje = $e->getMessage();
             $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");

@@ -167,6 +167,5 @@ class cliente_sucursal{
             return $ret;
         }
 	}
-	
 }
 

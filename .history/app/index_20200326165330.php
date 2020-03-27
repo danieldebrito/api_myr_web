@@ -95,7 +95,6 @@ $app->group('/clientes', function () {
   $this->post('/update', \clienteApi::class . ':updateApi');
 
   $this->post('/login[/]', \clienteApi::class . ':LoginCliente');
-  
 });
 
 $app->group('/cliente_sucursales', function () {
