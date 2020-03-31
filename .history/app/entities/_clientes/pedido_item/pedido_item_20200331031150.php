@@ -169,13 +169,13 @@ class pedido_item
 				AND pedidos_item.idCliente = $idCliente
 				AND pedidos_item.idPedido = $idPedido"
 			);
-			$consulta->execute();
-			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS);
+			return $consulta->execute();
+			$ret = $consulta->fetchObject(PDO::FETCH_CLASS);
         } catch (Exception $e) {
             $mensaje = $e->getMessage("pedido_item");
             $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
         } finally {
-            return $ret;
+            //return $ret;
         }
 	}
 }

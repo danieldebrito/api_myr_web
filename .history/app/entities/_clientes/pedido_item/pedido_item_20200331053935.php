@@ -159,7 +159,7 @@ class pedido_item
         return $consulta->execute();
 	}
 
-	public static function subtotal($idCliente, $idPedido) {
+	public static function subtotal($idCliente) {
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
@@ -167,7 +167,7 @@ class pedido_item
 				FROM pedidos_item, articulos
 				WHERE pedidos_item.idArticulo = articulos.id_articulo
 				AND pedidos_item.idCliente = $idCliente
-				AND pedidos_item.idPedido = $idPedido"
+				AND pedidos_item.idPedido = -1"
 			);
 			$consulta->execute();
 			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS);
