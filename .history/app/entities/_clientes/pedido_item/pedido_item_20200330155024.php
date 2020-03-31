@@ -1,9 +1,10 @@
 <?php
 class pedido_item
 {
-	public $id_pedido_item;
-	public $id_pedido;
-	public $id_articulo;
+	public $idPedidoItem;
+	public $idPedido;
+	public $idCliente;
+	public $idArticulo;
 	public $cantidad;
 
   	public static function readAll () {
@@ -27,7 +28,7 @@ class pedido_item
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `pedidos_item` WHERE `id_pedido_item` = $id"
+				"SELECT * FROM `pedidos_item` WHERE `idPedidoItem` = $id"
 			);
 			$consulta->execute();
 			$ret = $consulta->fetchObject("pedido_item");
@@ -44,13 +45,14 @@ class pedido_item
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta(
 				"INSERT INTO `pedidos_item`
-				(`id_pedido`, `id_articulo`, `cantidad`)
+				(`idPedido`,`idCliente`, `idArticulo`, `cantidad`)
 				VALUES
-				(:id_pedido, :id_articulo, :cantidad)"
+				(:idPedido, :idCliente, :idArticulo, :cantidad)"
 			);
 			// $consulta->bindValue(':id_pedido_item', $this->id_pedido_item, PDO::PARAM_INT); ai
-			$consulta->bindValue(':id_pedido', $this->id_pedido, PDO::PARAM_INT);
-			$consulta->bindValue(':id_articulo', $this->id_articulo, PDO::PARAM_STR);
+			$consulta->bindValue(':idPedido', $this->idPedido, PDO::PARAM_INT);
+			$consulta->bindValue(':idCliente', $this->idCliente, PDO::PARAM_STR);
+			$consulta->bindValue(':idArticulo', $this->idArticulo, PDO::PARAM_STR);
 			$consulta->bindValue(':cantidad', $this->cantidad, PDO::PARAM_INT);
 			$consulta->execute();
 
@@ -62,31 +64,33 @@ class pedido_item
         }
 	}
 
-	public function update(){
+	public function update() {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta(
 				"UPDATE `pedidos_item` SET 
-				`id_pedido` = :id_pedido, 
-				`id_articulo` = :id_articulo, 
+				`idPedido` = :idPedido,
+				`idCliente` = :idCliente,  
+				`idArticulo` = :idArticulo, 
 				`cantidad` = :cantidad
-				WHERE `id_pedido_item` = :id_pedido_item");
+				WHERE `idPedidoItem` = :idPedidoItem");
                 
-			$consulta->bindValue(':id_pedido_item', $this->id_pedido_item, PDO::PARAM_INT);
-			$consulta->bindValue(':id_pedido', $this->id_pedido, PDO::PARAM_INT);
-			$consulta->bindValue(':id_articulo', $this->id_articulo, PDO::PARAM_STR);
+			$consulta->bindValue(':idPedidoItem', $this->idPedidoItem, PDO::PARAM_INT);
+			$consulta->bindValue(':idPedido', $this->idPedido, PDO::PARAM_INT);
+			$consulta->bindValue(':idCliente', $this->idCliente, PDO::PARAM_STR);
+			$consulta->bindValue(':idArticulo', $this->idArticulo, PDO::PARAM_STR);
 			$consulta->bindValue(':cantidad', $this->cantidad, PDO::PARAM_INT);
 
         return $consulta->execute();
 	}
 	
-	public static function delete($id){
+	public static function delete($id) {
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta(
 				"DELETE FROM `pedidos_item` 
-				WHERE `id_pedido_item` = $id"
+				WHERE `idPedidoItem` = $id"
 				);
-            $consulta->bindValue(':id_pedido_item', $id, PDO::PARAM_STR);
+            $consulta->bindValue(':idPedidoItem', $id, PDO::PARAM_STR);
             $consulta->execute();
             $respuesta = array("Estado" => true, "Mensaje" => "Eliminado Correctamente");
 
@@ -99,16 +103,14 @@ class pedido_item
         }
 	}
 
-	/*
-
 	public static function readAllCliente ($id) {
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT p.id_pedido_item, p.id_cliente, p.id_pedido, p.id_articulo, p.cantidad, p.estado, a.descripcion_corta, a.stock, a.precio_lista
+				"SELECT p.idPedidoItem, p.idCliente, p.idArticulo, p.cantidad, a.descripcion_corta, a.stock, a.precio_lista
 				FROM articulos a, pedidos_item p
-				WHERE a.id_articulo = p.id_articulo 
-				AND p.id_cliente = $id"
+				WHERE a.id_articulo = p.idArticulo 
+				AND p.idCliente = $id"
 			);
 			$consulta->execute();
 					
@@ -120,16 +122,20 @@ class pedido_item
 			return $ret;
 		}		
 	}
-
+/**
+ * id_pedido -1 significa que no pertenece a ningun pedido
+ * es decir, falta cerrar el pedido y se reemplaza con el numero de pedido
+ * generado una vez que el cliente cierra el pedido
+ */
 	public static function readAllClienteAbierto ($id) {
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT p.id_pedido_item, p.id_cliente, p.id_pedido, p.id_articulo, p.cantidad, p.estado, a.descripcion_corta, a.stock, a.precio_lista
+				"SELECT p.idPedidoItem, p.idCliente, p.idPedido, p.idArticulo, p.cantidad, a.descripcion_corta, a.stock, a.precio_lista
 				FROM articulos a, pedidos_item p
-				WHERE a.id_articulo = p.id_articulo 
-				AND p.id_cliente = $id 
-				AND p.estado = 'abierto'"
+				WHERE a.id_articulo = p.idArticulo 
+				AND p.idCliente = $id 
+				AND p.idPedido = -1"
 			);
 			$consulta->execute();
 					
@@ -142,15 +148,35 @@ class pedido_item
 		}		
 	}
 
-	public function updateItems($id_pedido, $id_cliente){
+	public function updateItems($idPedido, $idCliente){
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta(
 			"UPDATE `pedidos_item` 
-			SET `id_pedido`= $id_pedido, `estado`= 'en_curso' 
-			WHERE `id_cliente` = '$id_cliente'
-			AND `estado` = 'abierto'");
+			SET `idPedido`= $idPedido 
+			WHERE `idCliente` = '$idCliente'
+			AND `idPedido` = -1");
 
         return $consulta->execute();
-	}*/
+	}
+
+	public static function subtotal($idCliente, $idPedido) {
+		try {
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta = $objetoAccesoDato->RetornarConsulta(
+				"SELECT SUM(articulos.precio_lista * pedidos_item.cantidad) AS subtotal
+				FROM pedidos_item, articulos
+				WHERE pedidos_item.idArticulo = articulos.id_articulo
+				AND pedidos_item.idCliente = $idCliente
+				AND pedidos_item.idPedido = $idPedido"
+			);
+			$consulta->execute();
+			$ret = $consulta->fetchObject();
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+	}
 }
 

@@ -24,28 +24,25 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
 
 		$entity = new pedido_item();
 		//$entity->id_pedido_item = $ArrayDeParametros['id_pedido_item'];
-	  	$entity->id_cliente = $ArrayDeParametros['id_cliente'];
-	  	$entity->id_pedido = $ArrayDeParametros['id_pedido'];
-		$entity->id_articulo = $ArrayDeParametros['id_articulo'];
+		$entity->idPedido = $ArrayDeParametros['idPedido'];
+     	$entity->idCliente = $ArrayDeParametros['idCliente'];
+		$entity->idArticulo = $ArrayDeParametros['idArticulo'];
 		$entity->cantidad = $ArrayDeParametros['cantidad'];
-		$entity->estado = $ArrayDeParametros['estado'];
 		  
 		$response = $entity->create();
 
 	  	return $response;
 	}
 
-	public function updateApi($request, $response, $args)
-    {
+	public function updateApi($request, $response, $args) {
 		$ArrayDeParametros = $request->getParsedBody();
 		
 		$entity = new pedido_item();
-		$entity->id_pedido_item = $ArrayDeParametros['id_pedido_item'];
-	  	$entity->id_cliente = $ArrayDeParametros['id_cliente'];
-	  	$entity->id_pedido = $ArrayDeParametros['id_pedido'];
-		$entity->id_articulo = $ArrayDeParametros['id_articulo'];
+		$entity->idPedidoItem = $ArrayDeParametros['idPedidoItem'];
+		$entity->idPedido = $ArrayDeParametros['idPedido'];
+		$entity->idCliente = $ArrayDeParametros['idCliente'];
+		$entity->idArticulo = $ArrayDeParametros['idArticulo'];
 		$entity->cantidad = $ArrayDeParametros['cantidad'];
-		$entity->estado = $ArrayDeParametros['estado'];
 
 		$resultado = $entity->update();
 		
@@ -55,7 +52,7 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
         return $response->withJson($objDelaRespuesta, 200);
 	}
 	
-	public function deleteApi($request, $response, $args){
+	public function deleteApi($request, $response, $args) {
         $id = $args["id"];
         $respuesta = pedido_item::delete($id);
         $newResponse = $response->withJson($respuesta, 200);
@@ -82,12 +79,22 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
 		
 		$ArrayDeParametros = $request->getParsedBody();
 
-		$id_pedido=$ArrayDeParametros['id_pedido'];
-		$id_cliente=$ArrayDeParametros['id_cliente'];
+		$id_pedido=$ArrayDeParametros['idPedido'];
+		$id_cliente=$ArrayDeParametros['idCliente'];
 
 		$all=pedido_item::updateItems($id_pedido, $id_cliente);
 		$newResponse = $response->withJson($all, 200);
 
+		return $newResponse;
+	}
+
+	public function subtotalApi($request, $response, $args) {
+		$idCliente=$ArrayDeParametros['idCliente'];
+		$idPedido=$ArrayDeParametros['idPedido'];
+
+		$art=pedido_item::subtotal($idCliente, idPedido);
+		$newResponse = $response->withJson($art, 200);  
+		
 		return $newResponse;
 	}
 }

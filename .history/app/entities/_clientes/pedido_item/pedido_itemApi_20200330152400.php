@@ -89,13 +89,10 @@ class pedido_itemApi extends pedido_item implements IApiCRUD {
 	}
 
 	public function subtotalApi($request, $response, $args) {
+		$id_cliente=$ArrayDeParametros['idCliente'];
+		$id_pedido=$ArrayDeParametros['idPedido'];
 
-		$ArrayDeParametros = $request->getParsedBody();
-
-		$idCliente=$ArrayDeParametros['idCliente'];
-		$idPedido=$ArrayDeParametros['idPedido'];
-
-		$art=pedido_item::subtotal($idCliente, $idPedido);
+		$art=pedido_item::subtotal($idCliente, idPedido);
 		$newResponse = $response->withJson($art, 200);  
 		
 		return $newResponse;

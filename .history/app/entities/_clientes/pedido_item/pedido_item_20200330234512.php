@@ -158,5 +158,25 @@ class pedido_item
 
         return $consulta->execute();
 	}
+
+	public static function subtotal($idCliente, $idPedido) {
+		try {
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta = $objetoAccesoDato->RetornarConsulta(
+				"SELECT SUM(articulos.precio_lista * pedidos_item.cantidad) AS subtotal
+				FROM pedidos_item, articulos
+				WHERE pedidos_item.idArticulo = articulos.id_articulo
+				AND pedidos_item.idCliente = $idCliente
+				AND pedidos_item.idPedido = $idPedido"
+			);
+			$consulta->execute();
+			$ret = $consulta->fetchObject(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $mensaje = $e->getMessage("pedido_item");
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+        } finally {
+            return $ret;
+        }
+	}
 }
 
