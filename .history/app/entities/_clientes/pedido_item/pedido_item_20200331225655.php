@@ -143,7 +143,7 @@ class pedido_item
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT p.idPedidoItem, p.idCliente, p.idPedido, p.idArticulo, p.cantidad, a.descripcion_corta, a.stock, p.precio_lista
+				"SELECT p.idPedidoItem, p.idCliente, p.idPedido, p.idArticulo, p.cantidad, a.descripcion_corta, a.stock, a.precioLista
 				FROM articulos a, pedidos_item p
 				WHERE a.id_articulo = p.idArticulo 
 				AND p.idCliente = $id 

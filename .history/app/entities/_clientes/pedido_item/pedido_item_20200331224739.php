@@ -5,7 +5,7 @@ class pedido_item
 	public $idPedido;
 	public $idCliente;
 	public $idArticulo;
-	public $precio_lista;
+	public $precioLista;
 	public $cantidad;
 
   	public static function readAll () {
@@ -46,15 +46,15 @@ class pedido_item
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta(
 				"INSERT INTO `pedidos_item`
-				(`idPedido`,`idCliente`, `idArticulo`, `precio_lista`, `cantidad`)
+				(`idPedido`,`idCliente`, `idArticulo`, `precioLista`, `cantidad`)
 				VALUES
-				(:idPedido, :idCliente, :idArticulo, :precio_lista, :cantidad)"
+				(:idPedido, :idCliente, :idArticulo, :precioLista, :cantidad)"
 			);
 			// $consulta->bindValue(':id_pedido_item', $this->id_pedido_item, PDO::PARAM_INT); ai
 			$consulta->bindValue(':idPedido', $this->idPedido, PDO::PARAM_INT);
 			$consulta->bindValue(':idCliente', $this->idCliente, PDO::PARAM_STR);
 			$consulta->bindValue(':idArticulo', $this->idArticulo, PDO::PARAM_STR);
-			$consulta->bindValue(':precio_lista', $this->precio_lista, PDO::PARAM_STR);
+			$consulta->bindValue(':precioLista', $this->precioLista, PDO::PARAM_STR);
 			$consulta->bindValue(':cantidad', $this->cantidad, PDO::PARAM_INT);
 			$consulta->execute();
 
@@ -73,7 +73,7 @@ class pedido_item
 				`idPedido` = :idPedido,
 				`idCliente` = :idCliente,  
 				`idArticulo` = :idArticulo, 
-				`precio_lista` = :precio_lista,
+				`precioLista` = :precioLista,
 				`cantidad` = :cantidad
 				WHERE `idPedidoItem` = :idPedidoItem");
                 
@@ -81,7 +81,7 @@ class pedido_item
 			$consulta->bindValue(':idPedido', $this->idPedido, PDO::PARAM_INT);
 			$consulta->bindValue(':idCliente', $this->idCliente, PDO::PARAM_STR);
 			$consulta->bindValue(':idArticulo', $this->idArticulo, PDO::PARAM_STR);
-			$consulta->bindValue(':precio_lista', $this->precio_lista, PDO::PARAM_STR);
+			$consulta->bindValue(':precioLista', $this->precioLista, PDO::PARAM_STR);
 			$consulta->bindValue(':cantidad', $this->cantidad, PDO::PARAM_INT);
 
         return $consulta->execute();
@@ -119,7 +119,7 @@ class pedido_item
 				p.cantidad, 
 				a.descripcion_corta, 
 				a.stock, 
-				p.precio_lista
+				a.precio_lista
 				FROM articulos a, pedidos_item p
 				WHERE a.id_articulo = p.idArticulo 
 				AND p.idCliente = $id"
@@ -143,7 +143,7 @@ class pedido_item
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT p.idPedidoItem, p.idCliente, p.idPedido, p.idArticulo, p.cantidad, a.descripcion_corta, a.stock, p.precio_lista
+				"SELECT p.idPedidoItem, p.idCliente, p.idPedido, p.idArticulo, p.cantidad, a.descripcion_corta, a.stock, a.precioLista
 				FROM articulos a, pedidos_item p
 				WHERE a.id_articulo = p.idArticulo 
 				AND p.idCliente = $id 

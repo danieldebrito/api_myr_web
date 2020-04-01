@@ -7,6 +7,8 @@ class pedido
 	public $idExpreso;
 	public $estado;
 	public $fecha;
+	public $idDescuento;
+	public $subtotalNeto;
 	public $observaciones;
 	
   	public static function readAll () {
@@ -47,9 +49,9 @@ class pedido
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta(
 				"INSERT INTO `pedidos`
-				(`idClienteSucursal`,`idCliente`, `idExpreso`, `estado`, `fecha`, `observaciones`)
+				(`idClienteSucursal`,`idCliente`, `idExpreso`, `estado`, `fecha`, `idDescuento`, `subtotalNeto` ,`observaciones`)
 				VALUES
-				(:idClienteSucursal, :idCliente, :idExpreso, :estado, :fecha, :observaciones)"
+				(:idClienteSucursal, :idCliente, :idExpreso, :estado, :fecha, :idDescuento, :subtotalNeto, :observaciones)"
 			);
 
 			// $consulta->bindValue(':id_pedido', $this->id_pedido, PDO::PARAM_INT); AI
@@ -58,6 +60,8 @@ class pedido
 			$consulta->bindValue(':idExpreso', $this->idExpreso, PDO::PARAM_INT);
 			$consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
 			$consulta->bindValue(':fecha', $this->fecha, PDO::PARAM_STR);
+			$consulta->bindValue(':idDescuento', $this->idDescuento, PDO::PARAM_STR);
+			$consulta->bindValue(':subtotalNeto', $this->subtotalNeto, PDO::PARAM_INT);
 			$consulta->bindValue(':observaciones', $this->observaciones, PDO::PARAM_STR);
 			
 			$consulta->execute();
@@ -79,6 +83,8 @@ class pedido
 				`idExpreso` = :idExpreso, 
 				`estado` = :estado, 
                 `fecha` = :fecha,
+				`idDescuento` = :idDescuento,
+				`subtotalNeto` = :subtotalNeto,
 				`observaciones` = :observaciones
 				WHERE `idPedido` = :idPedido");
                 
@@ -88,6 +94,8 @@ class pedido
 			$consulta->bindValue(':idExpreso', $this->idExpreso, PDO::PARAM_STR);
 			$consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
 			$consulta->bindValue(':fecha', $this->fecha, PDO::PARAM_STR);
+			$consulta->bindValue(':idDescuento', $this->idDescuento, PDO::PARAM_STR);
+			$consulta->bindValue(':subtotalNeto', $this->subtotalNeto, PDO::PARAM_INT);
 			$consulta->bindValue(':observaciones', $this->observaciones, PDO::PARAM_STR);
 
         return $consulta->execute();
@@ -129,27 +137,25 @@ class pedido
 			return $ret;
 		}		
 	}
-}
 
-
-
-	/////////////////////////////////////-----////////////////////////////////////////////////////
-
-/*	public static function traePedidoAbierto($id) {
+	public static function subtotal($idCliente, $idPedido) {
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `pedidos` WHERE `id_cliente` = $id AND `estado` = 'abierto'"
+				"SELECT SUM(articulos.precio_lista * pedidos_item.cantidad) AS subtotal
+				FROM pedidos_item, articulos
+				WHERE pedidos_item.idArticulo = articulos.id_articulo
+				AND pedidos_item.idCliente = $idCliente
+				AND pedidos_item.idPedido = $idPedido"
 			);
 			$consulta->execute();
-			$ret = $consulta->fetchObject("pedido");
+			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS);
         } catch (Exception $e) {
-            $mensaje = $e->getMessage();
+            $mensaje = $e->getMessage("pedido_item");
             $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
         } finally {
             return $ret;
         }
 	}
-
-*/
+}
 

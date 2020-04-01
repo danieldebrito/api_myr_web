@@ -28,7 +28,9 @@ class pedidoApi extends pedido implements IApiCRUD {
 		$entity->idCliente = $ArrayDeParametros['idCliente'];
 		$entity->idExpreso = $ArrayDeParametros['idExpreso'];
 	  	$entity->estado = $ArrayDeParametros['estado'];
-	  	$entity->fecha = $ArrayDeParametros['fecha'];
+		$entity->fecha = $ArrayDeParametros['fecha'];
+		$entity->idDescuento = $ArrayDeParametros['idDescuento'];
+		$entity->subtotalNeto = $ArrayDeParametros['subtotalNeto'];
 	  	$entity->observaciones = $ArrayDeParametros['observaciones'];
 		  
 		$response = $entity->create();
@@ -47,6 +49,8 @@ class pedidoApi extends pedido implements IApiCRUD {
 	 	$entity->idExpreso = $ArrayDeParametros['idExpreso'];
 		$entity->estado = $ArrayDeParametros['estado'];
 		$entity->fecha = $ArrayDeParametros['fecha'];
+		$entity->idDescuento = $ArrayDeParametros['idDescuento'];
+		$entity->subtotalNeto = $ArrayDeParametros['subtotalNeto'];
 		$entity->observaciones = $ArrayDeParametros['observaciones'];
 
 		$resultado = $entity->update();
@@ -63,19 +67,6 @@ class pedidoApi extends pedido implements IApiCRUD {
         $newResponse = $response->withJson($respuesta, 200);
         return $newResponse;
 	}
-}
-
-
-/*
-////////////////////////////////----///////////////////////////////////
-	
-	public function traePedidoAbiertoApi($request, $response, $args) {
-		$id=$args['id'];
-		$art=pedido::traePedidoAbierto($id);
-		$newResponse = $response->withJson($art, 200);  
-		
-		return $newResponse;
-	}
 
 	public function readAllClienteApi($request, $response, $args) {
 		$id=$args['id'];
@@ -83,8 +74,8 @@ class pedidoApi extends pedido implements IApiCRUD {
 		$newResponse = $response->withJson($art, 200);  
 		
 		return $newResponse;
-	}*/
+	}
+}
 ?>
-
 
 

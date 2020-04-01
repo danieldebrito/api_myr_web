@@ -7,6 +7,7 @@ class pedido
 	public $idExpreso;
 	public $estado;
 	public $fecha;
+	public $idDescuento;
 	public $observaciones;
 	
   	public static function readAll () {
@@ -47,9 +48,9 @@ class pedido
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta(
 				"INSERT INTO `pedidos`
-				(`idClienteSucursal`,`idCliente`, `idExpreso`, `estado`, `fecha`, `observaciones`)
+				(`idClienteSucursal`,`idCliente`, `idExpreso`, `estado`, `fecha`, `idDescuento`, `observaciones`)
 				VALUES
-				(:idClienteSucursal, :idCliente, :idExpreso, :estado, :fecha, :observaciones)"
+				(:idClienteSucursal, :idCliente, :idExpreso, :estado, :fecha, :idDescuento :observaciones)"
 			);
 
 			// $consulta->bindValue(':id_pedido', $this->id_pedido, PDO::PARAM_INT); AI
@@ -58,6 +59,7 @@ class pedido
 			$consulta->bindValue(':idExpreso', $this->idExpreso, PDO::PARAM_INT);
 			$consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
 			$consulta->bindValue(':fecha', $this->fecha, PDO::PARAM_STR);
+			$consulta->bindValue(':idDescuento', $this->idDescuento, PDO::PARAM_STR);
 			$consulta->bindValue(':observaciones', $this->observaciones, PDO::PARAM_STR);
 			
 			$consulta->execute();
@@ -79,6 +81,7 @@ class pedido
 				`idExpreso` = :idExpreso, 
 				`estado` = :estado, 
                 `fecha` = :fecha,
+				`idDescuento` = :idDescuento,
 				`observaciones` = :observaciones
 				WHERE `idPedido` = :idPedido");
                 
@@ -88,6 +91,7 @@ class pedido
 			$consulta->bindValue(':idExpreso', $this->idExpreso, PDO::PARAM_STR);
 			$consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
 			$consulta->bindValue(':fecha', $this->fecha, PDO::PARAM_STR);
+			$consulta->bindValue(':idDescuento', $this->idDescuento, PDO::PARAM_STR);
 			$consulta->bindValue(':observaciones', $this->observaciones, PDO::PARAM_STR);
 
         return $consulta->execute();
@@ -112,33 +116,12 @@ class pedido
             return $respuesta;
         }
 	}
-}
-
-
-
-	/////////////////////////////////////-----////////////////////////////////////////////////////
-
-/*	public static function traePedidoAbierto($id) {
-		try {
-			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `pedidos` WHERE `id_cliente` = $id AND `estado` = 'abierto'"
-			);
-			$consulta->execute();
-			$ret = $consulta->fetchObject("pedido");
-        } catch (Exception $e) {
-            $mensaje = $e->getMessage();
-            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
-        } finally {
-            return $ret;
-        }
-	}
 
 	public static function readAllCliente ($id) {
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `pedidos` WHERE `id_cliente` = $id"
+				"SELECT * FROM `pedidos` WHERE `idCliente`  = $id ORDER BY `pedidos`.`fecha` DESC"
 			);
 			$consulta->execute();
 					
@@ -149,5 +132,6 @@ class pedido
 		} finally {
 			return $ret;
 		}		
-	}*/
+	}
+}
 
