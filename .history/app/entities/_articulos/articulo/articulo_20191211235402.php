@@ -116,7 +116,7 @@ class articulo
             $consulta->bindValue(':unid_pack_juego_tapa', $this->unid_pack_juego_tapa, PDO::PARAM_STR);
             $consulta->bindValue(':cant_kit', $this->cant_kit, PDO::PARAM_STR);
             $consulta->bindValue(':pack_venta', $this->pack_venta, PDO::PARAM_STR);
-            $consulta->bindValue(':precio_lista', $this->precio_lista, PDO::PARAM_INT);
+            $consulta->bindValue(':precio_lista', $this->precio_lista, PDO::PARAM_STR);
             $consulta->bindValue(':img_peq_url', $this->img_peq_url, PDO::PARAM_STR);
             $consulta->bindValue(':img_gde_url', $this->img_gde_url, PDO::PARAM_STR);
             $consulta->bindValue(':img_envase_url', $this->img_envase_url, PDO::PARAM_STR);
@@ -192,8 +192,8 @@ class articulo
                 $consulta->bindValue(':stock', $this->stock, PDO::PARAM_STR);
                 $consulta->bindValue(':unid_pack_juego_tapa', $this->unid_pack_juego_tapa, PDO::PARAM_STR);
                 $consulta->bindValue(':cant_kit', $this->cant_kit, PDO::PARAM_STR);
-                $consulta->bindValue(':pack_venta', $this->pack_venta, PDO::PARAM_INT);
-                $consulta->bindValue(':precio_lista', $this->precio_lista, PDO::PARAM_INT);
+                $consulta->bindValue(':pack_venta', $this->pack_venta, PDO::PARAM_STR);
+                $consulta->bindValue(':precio_lista', $this->precio_lista, PDO::PARAM_STR);
                 $consulta->bindValue(':img_peq_url', $this->img_peq_url, PDO::PARAM_STR);
                 $consulta->bindValue(':img_gde_url', $this->img_gde_url, PDO::PARAM_STR);
                 $consulta->bindValue(':img_envase_url', $this->img_envase_url, PDO::PARAM_STR);
