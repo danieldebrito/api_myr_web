@@ -69,7 +69,7 @@ $app->group('/art_mar_mod_mot', function () {
 $app->group('/cards', function () {
   $this->get('/', \cardsApi::class . ':readAllApi');
   $this->post('/filtrar[/]', \cardsApi::class . ':readParamsApi');
-  $this->get('/{id_articulo}', \cardsApi::class . ':readByIdApi');
+  $this->post('/byID[/]', \cardsApi::class . ':readByIdApi');
 })->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
 $app->group('/user', function () {

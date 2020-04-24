@@ -68,14 +68,15 @@ class cards {
         return $consulta->fetchAll(PDO::FETCH_CLASS);
     }
 
-    public static function readById ($id_articulo){
+    public static function readById ($id){
         try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta
             (
-                "SELECT * FROM `cards` WHERE `id_articulo` LIKE "."'%"."$id_articulo"."%'"
-        );
+                "SELECT * FROM `cards` WHERE `id_articulo` = '01-2870 S'"
 
+               // "SELECT * FROM `cards` WHERE `id_articulo` LIKE '%'.'$id'.'%'"
+        );
             $consulta->execute();
             $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
 

@@ -43,7 +43,7 @@ class cardsApi extends cards
     }
     
 	public function readByIdApi($request, $response, $args) {
-		$id=$args['id_articulo'];
+		$id=$args['id'];
 		$arts=cards::readById($id);
 		$newResponse = $response->withJson($arts, 200);  
 		

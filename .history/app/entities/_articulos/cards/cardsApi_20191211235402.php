@@ -40,13 +40,5 @@ class cardsApi extends cards
 		$newResponse = $response->withJson($all, 200);
 
 		return $newResponse;
-    }
-    
-	public function readByIdApi($request, $response, $args) {
-		$id=$args['id_articulo'];
-		$arts=cards::readById($id);
-		$newResponse = $response->withJson($arts, 200);  
-		
-		return $newResponse;
 	}
 }

@@ -67,23 +67,4 @@ class cards {
 
         return $consulta->fetchAll(PDO::FETCH_CLASS);
     }
-
-    public static function readById ($id_articulo){
-        try {
-            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $consulta = $objetoAccesoDato->RetornarConsulta
-            (
-                "SELECT * FROM `cards` WHERE `id_articulo` LIKE "."'%"."$id_articulo"."%'"
-        );
-
-            $consulta->execute();
-            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
-
-        } catch (Exception $e) {
-            $mensaje = $e->getMessage();
-            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
-        } finally {
-            return $ret;
-        }
-    }
 }

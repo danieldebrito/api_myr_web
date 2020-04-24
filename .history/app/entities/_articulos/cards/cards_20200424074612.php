@@ -73,9 +73,12 @@ class cards {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta
             (
-                "SELECT * FROM `cards` WHERE `id_articulo` LIKE "."'%"."$id_articulo"."%'"
+                "SELECT * FROM `cards` WHERE `id_articulo` LIKE "."'%'"."'$id_articulo'"."'%'"
+
+               // "SELECT * FROM `cards` WHERE `id_articulo` LIKE '%'.'$id'.'%'"
         );
 
+        var_dump("SELECT * FROM `cards` WHERE `id_articulo` LIKE "."'%'"."'$id_articulo'"."'%'");
             $consulta->execute();
             $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
 
