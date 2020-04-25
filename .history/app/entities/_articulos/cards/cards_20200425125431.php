@@ -91,6 +91,10 @@ class cards {
 
         $fraseArray = explode(" ", $frase);
 
+        var_dump($fraseArray);
+
+    
+
        $instruccionSQL = 'SELECT * FROM `cards` WHERE 1';
 
         foreach ($fraseArray  as &$item ) {
