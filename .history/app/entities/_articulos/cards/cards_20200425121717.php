@@ -91,21 +91,16 @@ class cards {
 
         $fraseArray = explode(" ", $frase);
 
-        var_dump($fraseArray);
+        var_dump($frase);
 
     
 
-       $instruccionSQL = 'SELECT * FROM `cards` WHERE 1';
+       $instruccionSQL = 'SELECT * FROM `cards` WHERE ';
 
-        foreach ($fraseArray  as &$item ) {
+        foreach ($fraseArray as &$item ) {
             $instruccionSQL = $instruccionSQL.
-            " AND CONCAT(`marca`,`modelo`,`motor`,`cilindrada`,`producto`,`aplicacion`,`aplicacionEspecifica`) 
-            LIKE "."'"."%".$item.'%'."'";
+            "CONCAT(`marca`,`modelo`,`cilindrada`,`producto`,`aplicacion`,`aplicacionEspecifica`) LIKE '%".$item."%'";
         } try {
-
-            var_dump($instruccionSQL);
-
-
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta
             ("$instruccionSQL");

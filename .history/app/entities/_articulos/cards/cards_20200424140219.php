@@ -86,46 +86,7 @@ class cards {
             return $ret;
         }
     }
-
-    public static function buscarPorFrase ($frase){
-
-        $fraseArray = explode(" ", $frase);
-
-        var_dump($fraseArray);
-
-    
-
-       $instruccionSQL = 'SELECT * FROM `cards` WHERE 1';
-
-        foreach ($fraseArray  as &$item ) {
-            $instruccionSQL = $instruccionSQL.
-            " AND CONCAT(`marca`,`modelo`,`motor`,`cilindrada`,`producto`,`aplicacion`,`aplicacionEspecifica`) 
-            LIKE "."'"."%".$item.'%'."'";
-        } try {
-
-            var_dump($instruccionSQL);
-
-
-            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $consulta = $objetoAccesoDato->RetornarConsulta
-            ("$instruccionSQL");
-
-            var_dump($instruccionSQL);
-
-            $consulta->execute();
-            $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
-
-        } catch (Exception $e) {
-            $mensaje = $e->getMessage();
-            $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
-        } finally {
-            return $ret;
-        }
-        
-
-    }
 }
-
 
 
 /*

@@ -87,30 +87,13 @@ class cards {
         }
     }
 
-    public static function buscarPorFrase ($frase){
-
-        $fraseArray = explode(" ", $frase);
-
-        var_dump($fraseArray);
-
-    
-
-       $instruccionSQL = 'SELECT * FROM `cards` WHERE 1';
-
-        foreach ($fraseArray  as &$item ) {
-            $instruccionSQL = $instruccionSQL.
-            " AND CONCAT(`marca`,`modelo`,`motor`,`cilindrada`,`producto`,`aplicacion`,`aplicacionEspecifica`) 
-            LIKE "."'"."%".$item.'%'."'";
-        } try {
-
-            var_dump($instruccionSQL);
-
-
+    public buscarPorFrase($frase) {
+        try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta
-            ("$instruccionSQL");
-
-            var_dump($instruccionSQL);
+            (
+                "SELECT * FROM `cards` WHERE `id_articulo` LIKE "."'%"."$id_articulo"."%'"
+        );
 
             $consulta->execute();
             $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
@@ -121,8 +104,6 @@ class cards {
         } finally {
             return $ret;
         }
-        
-
     }
 }
 

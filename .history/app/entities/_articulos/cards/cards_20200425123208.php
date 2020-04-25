@@ -99,8 +99,8 @@ class cards {
 
         foreach ($fraseArray  as &$item ) {
             $instruccionSQL = $instruccionSQL.
-            " AND CONCAT(`marca`,`modelo`,`motor`,`cilindrada`,`producto`,`aplicacion`,`aplicacionEspecifica`) 
-            LIKE "."'"."%".$item.'%'."'";
+            'AND CONCAT(`marca`,`modelo`,`cilindrada`,`producto`,`aplicacion`,`aplicacionEspecifica`) 
+            LIKE '%''.$item.'%';
         } try {
 
             var_dump($instruccionSQL);

@@ -95,12 +95,11 @@ class cards {
 
     
 
-       $instruccionSQL = 'SELECT * FROM `cards` WHERE 1';
+       $instruccionSQL = 'SELECT * FROM `cards` WHERE ';
 
         foreach ($fraseArray  as &$item ) {
             $instruccionSQL = $instruccionSQL.
-            " AND CONCAT(`marca`,`modelo`,`motor`,`cilindrada`,`producto`,`aplicacion`,`aplicacionEspecifica`) 
-            LIKE "."'"."%".$item.'%'."'";
+            "CONCAT(`marca`,`modelo`,`cilindrada`,`producto`,`aplicacion`,`aplicacionEspecifica`) LIKE '%".$item."%'";
         } try {
 
             var_dump($instruccionSQL);

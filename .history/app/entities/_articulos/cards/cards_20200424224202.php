@@ -89,23 +89,16 @@ class cards {
 
     public static function buscarPorFrase ($frase){
 
-        $fraseArray = explode(" ", $frase);
+        var_dump($frase);
 
-        var_dump($fraseArray);
+        /*
 
-    
+       $instruccionSQL = 'SELECT * FROM `cards` WHERE ';
 
-       $instruccionSQL = 'SELECT * FROM `cards` WHERE 1';
-
-        foreach ($fraseArray  as &$item ) {
+        foreach ($frase as &$item ) {
             $instruccionSQL = $instruccionSQL.
-            " AND CONCAT(`marca`,`modelo`,`motor`,`cilindrada`,`producto`,`aplicacion`,`aplicacionEspecifica`) 
-            LIKE "."'"."%".$item.'%'."'";
+            "CONCAT(`marca`,`modelo`,`cilindrada`,`producto`,`aplicacion`,`aplicacionEspecifica`) LIKE '%".$item."%'";
         } try {
-
-            var_dump($instruccionSQL);
-
-
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta
             ("$instruccionSQL");
@@ -121,8 +114,7 @@ class cards {
         } finally {
             return $ret;
         }
-        
-
+        */
     }
 }
 

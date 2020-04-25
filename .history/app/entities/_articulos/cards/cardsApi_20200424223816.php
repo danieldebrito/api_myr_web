@@ -52,10 +52,10 @@ class cardsApi extends cards
     
     public function buscarPorFraseApi($request, $response, $args) {
         $frase=$args['frase'];
-
+        
 		$arts=cards::buscarPorFrase($frase);
 		$newResponse = $response->withJson($arts, 200);  
 		
-        return $newResponse;
+		return $newResponse;
     }
 }
