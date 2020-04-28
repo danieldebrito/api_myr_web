@@ -138,15 +138,15 @@ class pedido
 		}		
 	}
 
-	public static function traePedidoAbierto ($id) {
+	public static function readAllClienteAbierto ($id) {
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
-				"SELECT * FROM `pedidos` WHERE `idCliente`  = $id AND `estado` = 'abierto' ORDER BY `pedidos`.`fecha` DESC"
+				"SELECT * FROM `pedidos` WHERE `idCliente`  = $id ORDER BY `pedidos`.`fecha` DESC"
 			);
 			$consulta->execute();
 					
-			$ret = $consulta->fetchObject("pedido");
+			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS, "pedido");
 		} catch (Exception $e) {
 			$mensaje = $e->getMessage();
 			$respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");

@@ -70,15 +70,15 @@ class pedidoApi extends pedido implements IApiCRUD {
 
 	public function readAllClienteApi($request, $response, $args) {
 		$id=$args['id'];
-		$art=pedido::readAllClienteAbierto($id);
+		$art=pedido::readAllCliente($id);
 		$newResponse = $response->withJson($art, 200);  
 		
 		return $newResponse;
 	}
 
-	public function traePedidoAbiertoApi($request, $response, $args) {
+	public function readAllClienteAbiertoApi($request, $response, $args) {
 		$id=$args['id'];
-		$art=pedido::traePedidoAbierto($id);
+		$art=pedido::readAllCliente($id);
 		$newResponse = $response->withJson($art, 200);  
 		
 		return $newResponse;

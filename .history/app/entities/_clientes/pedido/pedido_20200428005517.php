@@ -146,7 +146,7 @@ class pedido
 			);
 			$consulta->execute();
 					
-			$ret = $consulta->fetchObject("pedido");
+			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS, "pedido");
 		} catch (Exception $e) {
 			$mensaje = $e->getMessage();
 			$respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");

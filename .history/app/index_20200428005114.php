@@ -131,10 +131,9 @@ $app->group('/pedidos', function () {
   $this->delete('/{id}[/]', \pedidoApi::class . ':deleteApi');
   $this->post('/update', \pedidoApi::class . ':updateApi');
   $this->get('/cliente/{id}[/]', \pedidoApi::class . ':readAllClienteApi');
+
+  $this->post('/subtotal[/]', \pedido_itemApi::class . ':subtotalApi');
   $this->get('/abierto/{id}[/]', \pedidoApi::class . ':traePedidoAbiertoApi');
-
-
-  // $this->post('/subtotal[/]', \pedido_itemApi::class . ':subtotalApi');
 });
 
 $app->group('/pedidos_item', function () {

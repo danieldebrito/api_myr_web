@@ -138,7 +138,7 @@ class pedido
 		}		
 	}
 
-	public static function traePedidoAbierto ($id) {
+	public static function readAllClienteAbierto ($id) {
 		try {
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta = $objetoAccesoDato->RetornarConsulta(
@@ -146,7 +146,7 @@ class pedido
 			);
 			$consulta->execute();
 					
-			$ret = $consulta->fetchObject("pedido");
+			$ret =  $consulta->fetchAll(PDO::FETCH_CLASS, "pedido");
 		} catch (Exception $e) {
 			$mensaje = $e->getMessage();
 			$respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
