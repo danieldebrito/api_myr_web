@@ -5,12 +5,7 @@ class cards {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta
             (
-                "SELECT id_articulo, linea, marca, combustible, motor, cilindrada, competicion, producto, aplicacion, 
-                aplicacionEspecifica, urlImgPeq, materialDetalle, espesor, nueva, promo, stock, prioridadBusqueda,
-                GROUP_CONCAT( DISTINCT modelo SEPARATOR ' / ' ) as 'modelo'
-                FROM cards
-                WHERE 1
-                group by id_articulo"
+                "SELECT * FROM `cards` WHERE 1"
         );
             $consulta->execute();
             $ret = $consulta->fetchAll(PDO::FETCH_CLASS);
@@ -25,11 +20,7 @@ class cards {
 
     public function readParams($linea, $marca, $combustible, $motor, $modelo, $cilindrada, $competicion, $producto, $aplicacion){
 
-        $instruccionSQL = "SELECT id_articulo, linea, marca, combustible, motor, cilindrada, competicion, producto, aplicacion, 
-        aplicacionEspecifica, urlImgPeq, materialDetalle, espesor, nueva, promo, stock, prioridadBusqueda,
-        GROUP_CONCAT( DISTINCT modelo SEPARATOR ' / ' ) as 'modelo'
-        FROM cards
-        WHERE 1";
+        $instruccionSQL = 'SELECT * FROM `cards` WHERE 1';
 
         if ($linea != null) {
             $instruccionSQL = $instruccionSQL . ' AND ' . 'linea = ' . "'" . $linea . "'";
@@ -66,7 +57,7 @@ class cards {
         if ($aplicacion != null) {
             $instruccionSQL = $instruccionSQL . ' AND ' . 'aplicacion = ' . "'" . $aplicacion . "'";
         }
-        $instruccionSQL = $instruccionSQL.'group by id_articulo';
+
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("
@@ -82,11 +73,7 @@ class cards {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta
             (
-                "SELECT id_articulo, linea, marca, combustible, motor, cilindrada, competicion, producto, aplicacion, 
-                aplicacionEspecifica, urlImgPeq, materialDetalle, espesor, nueva, promo, stock, prioridadBusqueda,
-                GROUP_CONCAT( DISTINCT modelo SEPARATOR ' / ' ) as 'modelo'
-                FROM cards
-                WHERE 1 AND `id_articulo` LIKE "."'%"."$id_articulo"."%'".'group by id_articulo'
+                "SELECT * FROM `cards` WHERE `id_articulo` LIKE "."'%"."$id_articulo"."%'"
         );
 
             $consulta->execute();
@@ -104,11 +91,7 @@ class cards {
 
         $fraseArray = explode(" ", $frase);
 
-       $instruccionSQL = "SELECT id_articulo, linea, marca, combustible, motor, cilindrada, competicion, producto, aplicacion, 
-       aplicacionEspecifica, urlImgPeq, materialDetalle, espesor, nueva, promo, stock, prioridadBusqueda,
-       GROUP_CONCAT( DISTINCT modelo SEPARATOR ' / ' ) as 'modelo'
-       FROM cards
-       WHERE 1";
+       $instruccionSQL = 'SELECT * FROM `cards` WHERE 1';
 
         foreach ($fraseArray  as &$item ) {
             $instruccionSQL = $instruccionSQL.
@@ -116,7 +99,6 @@ class cards {
             LIKE "."'"."%".$item.'%'."'";
         } try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $instruccionSQL = $instruccionSQL.'group by id_articulo';
             $consulta = $objetoAccesoDato->RetornarConsulta
             ("$instruccionSQL");
 

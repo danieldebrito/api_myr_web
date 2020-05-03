@@ -104,11 +104,7 @@ class cards {
 
         $fraseArray = explode(" ", $frase);
 
-       $instruccionSQL = "SELECT id_articulo, linea, marca, combustible, motor, cilindrada, competicion, producto, aplicacion, 
-       aplicacionEspecifica, urlImgPeq, materialDetalle, espesor, nueva, promo, stock, prioridadBusqueda,
-       GROUP_CONCAT( DISTINCT modelo SEPARATOR ' / ' ) as 'modelo'
-       FROM cards
-       WHERE 1";
+       $instruccionSQL = 'SELECT * FROM `cards` WHERE 1';
 
         foreach ($fraseArray  as &$item ) {
             $instruccionSQL = $instruccionSQL.
@@ -116,7 +112,6 @@ class cards {
             LIKE "."'"."%".$item.'%'."'";
         } try {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $instruccionSQL = $instruccionSQL.'group by id_articulo';
             $consulta = $objetoAccesoDato->RetornarConsulta
             ("$instruccionSQL");
 
